@@ -62,6 +62,7 @@ public class VtnEditarPaquetesController {
     private PaqueteTuristico paquete;
 
     private String nombreAntiguo;
+
     public void init(PaqueteTuristico paquete, AnchorPane panel) {
         this.paquete=paquete;
         this.panel=panel;
@@ -86,16 +87,18 @@ public class VtnEditarPaquetesController {
 
 
     }
-    public void editarPaquete(){
+    /*public void editarPaquete(){
         agenciaViajes.modificarPaquete(
                 nombreAntiguo,
                 txtNombre.getText(),
                 txtCaracteristicas.getText(),
-                TxtPrecio.getText(),
+                TxtPrecio.getText()
 
 
         )
     }
+
+     */
 }
 
 

@@ -906,7 +906,7 @@ public class AgenciaViajes {
      * muestra un log informativo
      * @param msg mensaje que se guardara en el archivo log
      */
-    public  static void mensajeInformativo(String msg) {
+    public  void mensajeInformativo(String msg) {
         try
         {
             LOGGER.log(Level.INFO,msg);

@@ -91,12 +91,24 @@ public class VtnAgregarDestinosController {
                     txtDescripcion.getText(),
                     rutaImagenes,
                     boxClima.getValue());
-        } catch (IgualesException | CampoObligatorioException  e) {
+
+            agenciaViajes.mensajeInformativo("El destino se ha creado exitosamente");
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("El destino se ha creado exitosamente ");
+            alert.setHeaderText(null);
+            alert.show();
+
+        }
+        catch (IgualesException | CampoObligatorioException  e)
+        {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(e.getMessage());
             alert.setHeaderText(null);
             alert.show();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e)
+        {
             throw new RuntimeException(e);
         }
     }

@@ -142,13 +142,6 @@ public class VtnDllesPaquetesController {
         }
     }
 
-    public void verImagenes(){
-        Destino destinoSeleccionado=Destino.getSelectionModel().getSelectedItem();
-        ArrayList<String> imagenes=new ArrayList<>();
-        imagenes.addAll(destinoSeleccionado.getRutasImagenes());
-
-    }
-
     public void regresar(){
             try {
                 // Cargar el FXML de la nueva ventana

@@ -64,6 +64,7 @@ public class VtnInicioSesionController {
             VtnClientesController controller =loader.getController();
             controller.init(stage, this, cliente);
             stage.show();
+
         }
         else if(tipo.equals("admin")){
             FXMLLoader loader=new FXMLLoader(getClass().getResource("/Ventanas/VtnAdmin.fxml"));

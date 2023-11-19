@@ -104,11 +104,18 @@ public class VtnReservarController {
                 boxGuia.getValue(),
                 lblPrecio.getText());
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Nueva Reserva Creada.");
             alert.setHeaderText(null);
             alert.show();
-            enviarCorreo();
+            Thread correoThread = new Thread(() -> {
+                try {
+                    enviarCorreo();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            correoThread.start();
             regresar();
         }catch(CampoObligatorioException | MalaFechaException | ValorInvalidoException e){
             Alert alert = new Alert(Alert.AlertType.ERROR);

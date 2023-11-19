@@ -96,7 +96,8 @@ public class VtnClientesController {
             // Cargar el FXML en el AnchorPane derecho
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnReservas.fxml"));
             Pane nuevaVentana = loader.load();
-
+            VtnReservasController reservasController=loader.getController();
+            reservasController.init(panelVentana, cliente);
             // Limpiar el contenido anterior y establecer el nuevo contenido
             panelVentana.getChildren().clear();
             panelVentana.getChildren().add(nuevaVentana);

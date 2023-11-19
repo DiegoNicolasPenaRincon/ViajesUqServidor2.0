@@ -25,6 +25,7 @@ public class AgenciaViajes {
     private ArrayList<PaqueteTuristico> listaPaquetes;
     @Getter
     private ArrayList<GuiasTuristicos> listaGuias;
+    @Getter
     private ArrayList<Reservas> listaReservas;
     private static final Logger LOGGER= Logger.getLogger(AgenciaViajes.class.getName());
     private static AgenciaViajes AgenciaViajes;

@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="778.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.agencia.controller.VtnReservasController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="617.0" prefWidth="713.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.agencia.controller.VtnReservasController">
    <children>
-      <Pane prefHeight="113.0" prefWidth="778.0" style="-fx-background-color: #2E0089;">
+      <Pane prefHeight="113.0" prefWidth="713.0" style="-fx-background-color: #2E0089;">
          <children>
             <Label layoutX="281.0" layoutY="26.0" prefHeight="31.0" prefWidth="229.0" text="Tu aventura comienza aquí" textFill="#fffdfd">
                <font>
@@ -21,9 +21,9 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="515.0" prefHeight="103.0" prefWidth="778.0" style="-fx-background-color: #2E0089;">
+      <Pane layoutY="515.0" prefHeight="103.0" prefWidth="713.0" style="-fx-background-color: #2E0089;">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="187.0" layoutX="515.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="187.0" layoutX="535.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/Foto.png" />
                </image>
@@ -56,21 +56,22 @@
             <Font name="Gabriola" size="30.0" />
          </font>
       </Label>
-      <TableView fx:id="tablaReservas" layoutX="43.0" layoutY="216.0" prefHeight="243.0" prefWidth="439.0" style="-fx-background-color: white;">
+      <TableView fx:id="tablaReservas" layoutX="16.0" layoutY="216.0" prefHeight="243.0" prefWidth="568.0" style="-fx-background-color: white;">
          <columns>
-            <TableColumn fx:id="colEstado" prefWidth="71.33331298828125" style="-fx-background-color: #4800D8;" text="Estado" />
-            <TableColumn fx:id="colPaquete" prefWidth="112.00003051757812" style="-fx-background-color: #4800D8;" text="Paquete Turistico" />
-            <TableColumn fx:id="colPersonas" prefWidth="98.0" style="-fx-background-color: #4800D8;" text="Num. Personas" />
-            <TableColumn fx:id="colPrecio" style="-fx-background-color: #4800D8;" text="Precio" />
-            <TableColumn fx:id="colGuia" prefWidth="75.0" text="Guia" />
+            <TableColumn fx:id="colFecha" prefWidth="98.00000190734863" text="Fecha de Viaje" />
+            <TableColumn fx:id="colEstado" prefWidth="81.99999237060547" style="-fx-background-color: #4800D8;" text="Estado" />
+            <TableColumn fx:id="colPaquete" prefWidth="128.0000457763672" style="-fx-background-color: #4800D8;" text="Paquete Turistico" />
+            <TableColumn fx:id="colPersonas" prefWidth="98.66668701171875" style="-fx-background-color: #4800D8;" text="Num. Personas" />
+            <TableColumn fx:id="colPrecio" prefWidth="80.6666259765625" style="-fx-background-color: #4800D8;" text="Precio" />
+            <TableColumn fx:id="colGuia" prefWidth="77.99996948242188" text="Guia" />
          </columns>
       </TableView>
-      <Button fx:id="btnCalificar" layoutX="512.0" layoutY="284.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: gray;" text="Calificar " textFill="WHITE">
+      <Button fx:id="btnCalificar" layoutX="614.0" layoutY="242.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: gray;" text="Calificar " textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnEliminar" layoutX="512.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+      <Button fx:id="btnEliminar" layoutX="614.0" layoutY="309.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

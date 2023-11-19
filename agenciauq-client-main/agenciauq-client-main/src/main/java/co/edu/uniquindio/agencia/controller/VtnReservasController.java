@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
 public class VtnReservasController {
@@ -29,6 +30,9 @@ public class VtnReservasController {
 
     @FXML
     private TableColumn<Reservas, String> colEstado;
+
+    @FXML
+    private TableColumn<Reservas, String> colFecha;
 
     @FXML
     private TableColumn<Reservas, String> colGuia;
@@ -52,9 +56,11 @@ public class VtnReservasController {
         this.panelVentana=panelVentana;
         this.cliente=cliente;
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEstado().name()));
         colPaquete.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPaquete().getNombre()));
         colPersonas.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getNumPersonas())));
+        colFecha.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaViaje().format(formatter)));
         colGuia.setCellValueFactory(cellData -> {
             GuiasTuristicos guia = cellData.getValue().getGuiaTuristico();
             String guiaNombre = (guia != null) ? guia.getNombre() : "No";

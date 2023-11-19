@@ -422,7 +422,7 @@ public class AgenciaViajes {
         Persistencia_Serializacion.serializarObjetoXML(rutaDestinos,listaDestinos);
     }
 
-    public void eliminarDestinoPaquetes(int longitud,Destino destino) throws FileNotFoundException, NoHayObjetoException {
+    public void eliminarDestinoPaquetes(int longitud,Destino destino) throws FileNotFoundException {
         if(longitud<listaPaquetes.size())
         {
             if(listaPaquetes.get(longitud).getDestinos().contains(destino))
@@ -440,8 +440,6 @@ public class AgenciaViajes {
 
     /**
      * Modifica un destino
-     * @param nombre del destino actual para poder buscarlo
-     * @param ciudad del destino actual para poder buscarlo
      * @param longitud permite recorrer la lista de destinos
      * @param descripcion descripcion nueva del destino
      * @param rutasImagenes nuevas imagenes del destino o imagenes que se borraran del destino
@@ -451,10 +449,10 @@ public class AgenciaViajes {
      * @param agregarImagenes para saber si desea agregar imagenes o no
      * @param eliminarImagenes para saber si desea eliminar imagenes o no
      */
-    public void modificarDestinos(String nombre, String ciudad,int longitud,String descripcion,ArrayList<String> rutasImagenes,Clima clima,String nombreNuevo,String ciudadNueva,boolean agregarImagenes,boolean eliminarImagenes) {
+    public void modificarDestinos(Destino destino,int longitud,String descripcion,ArrayList<String> rutasImagenes,Clima clima,String nombreNuevo,String ciudadNueva,boolean agregarImagenes,boolean eliminarImagenes) {
         if (longitud<listaDestinos.size())
         {
-            if(nombre.equals(listaDestinos.get(longitud).getNombre())&&ciudad.equals(listaDestinos.get(longitud).getCiudad()))
+            if(destino.equals(listaDestinos.get(longitud)))
             {
                 if(descripcion!=null||!descripcion.isEmpty())
                 {
@@ -486,10 +484,28 @@ public class AgenciaViajes {
                         listaDestinos.get(longitud).getRutasImagenes().removeAll(rutasImagenes);
                     }
                 }
+
+                modificarDestinoPaquete(0,destino);
+
             }
             else
             {
-                modificarDestinos(nombre,ciudad,longitud+1,descripcion,rutasImagenes,clima,nombreNuevo,ciudadNueva,agregarImagenes,eliminarImagenes);
+                modificarDestinos(destino,longitud+1,descripcion,rutasImagenes,clima,nombreNuevo,ciudadNueva,agregarImagenes,eliminarImagenes);
+            }
+        }
+    }
+
+    public void modificarDestinoPaquete(int longitud, Destino destino) {
+        if(longitud<listaPaquetes.size())
+        {
+            if(listaPaquetes.get(longitud).getDestinos().contains(destino))
+            {
+                int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino);
+                listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+            }
+            else
+            {
+                modificarDestinoPaquete(longitud+1,destino);
             }
         }
     }

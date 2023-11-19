@@ -624,7 +624,9 @@ public class AgenciaViajes {
                 paqueteTuristico.getDestinos().clear();
                 paqueteTuristico.getDestinos().addAll(nuevoDestinos);
                 return paqueteTuristico; //
-            } else {
+            }
+            else
+            {
                 return modificarPaquete(nombreAntiguo, nuevoNombre, nuevoServicios, nuevoPrecio,
                         nuevoInicio, nuevoFinal, nuevoCupo, nuevaDuracion, nuevoDestinos, indice + 1);
             }
@@ -643,21 +645,14 @@ public class AgenciaViajes {
 
     /**
      *Elimina un paquete turistico
-     * @param nombre nombre del paquete, sirve para buscar el paquete que se vea a eliminar
-     * @param longitud sirve para recorrer el arreglo donde se encuentra alamacenados los paquetes
      */
-    public void EliminarPaqueteTuristico(String nombre,int longitud) {
-        if(longitud<nombre.length())
-        {
-            if(nombre.equals(listaPaquetes.get(longitud).getNombre()))
-            {
-                listaPaquetes.remove(longitud);
-            }
-            else
-            {
-                EliminarPaqueteTuristico(nombre,longitud+1);
-            }
-        }
+    public void eliminarPaqueteTuristico(PaqueteTuristico paquete) throws FileNotFoundException {
+       if(listaPaquetes.contains(paquete))
+       {
+           listaPaquetes.remove(paquete);
+       }
+
+       Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
     }
 
     //Metodos referentes a los guias turisticos

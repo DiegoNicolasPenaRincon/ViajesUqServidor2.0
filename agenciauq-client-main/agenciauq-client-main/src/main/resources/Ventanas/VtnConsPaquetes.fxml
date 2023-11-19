@@ -50,7 +50,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnDetalles" layoutX="454.0" layoutY="396.0" mnemonicParsing="false" style="-fx-background-color: gray;" text="Ver Detalles" textFill="WHITE">
+      <Button fx:id="btnDetalles" layoutX="464.0" layoutY="396.0" mnemonicParsing="false" onAction="#abrirEditar" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: gray;" text="Editar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

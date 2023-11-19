@@ -1,8 +1,12 @@
 package co.edu.uniquindio.agencia.controller;
 
+import co.edu.uniquindio.agencia.model.AgenciaViajes;
 import co.edu.uniquindio.agencia.model.Clima;
+import co.edu.uniquindio.agencia.model.Destino;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -11,11 +15,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VtnEditarDestinosController {
 
     @FXML
     private ComboBox<Clima> boxClima;
+
+    @FXML
+    private ComboBox<String> boxEleccion;
 
     @FXML
     private Button btnCargarImagenes;
@@ -53,9 +62,18 @@ public class VtnEditarDestinosController {
     @FXML
     private TextField txtNombre;
 
+    private final AgenciaViajes agenciaViajes=AgenciaViajes.getInstance();
+
+    public static Destino destino;
+
+    private final String [] eliminarOagregar={"Agregar","Eliminar"};
+
     private AnchorPane panel;
     public void init(AnchorPane panel) {
         this.panel=panel;
+        boxClima.setItems(FXCollections.observableArrayList(Clima.values()));
+        boxEleccion.setItems(FXCollections.observableArrayList(eliminarOagregar));
+
     }
 
     public void regresar(){
@@ -74,5 +92,30 @@ public class VtnEditarDestinosController {
             e.printStackTrace();
         }
 
+    }
+
+    public void guardarCambios() {
+        ArrayList<String> imagenesNuevas=new ArrayList<String>();
+        try
+        {
+            String nombreActual=destino.getNombre();
+            imagenesNuevas.add(txtImagen1.getText());
+            imagenesNuevas.add(txtImagen2.getText());
+            imagenesNuevas.add(txtImagen3.getText());
+            if(destino!=null)
+            {
+                System.out.println("necesito saber si es nulo");
+            }
+            agenciaViajes.modificarDestinos(destino,0,txtDescripcion.getText(),imagenesNuevas,boxClima.getValue(),txtNombre.getText(),txtCiudad.getText(),boxEleccion.getValue());
+
+
+        }
+        catch (Exception e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.setHeaderText(null);
+            alert.show();
+        }
     }
 }

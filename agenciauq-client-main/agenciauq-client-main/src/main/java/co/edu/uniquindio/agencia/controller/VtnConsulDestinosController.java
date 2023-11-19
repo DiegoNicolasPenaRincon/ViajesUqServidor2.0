@@ -69,8 +69,8 @@ public class VtnConsulDestinosController {
         {
             if (agenciaViajes.verificarDestino(destino))
             {
-                agenciaViajes.eliminarDestino(destino);
                 agenciaViajes.eliminarDestinoPaquetes(0,destino);
+                agenciaViajes.eliminarDestino(destino);
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("El destino se ha eliminado correctamente de nuestra base de datos, ademas, el destino ha sido retirado de todos los paquetes que lo incluian ");
                 alert.setHeaderText(null);
@@ -84,6 +84,10 @@ public class VtnConsulDestinosController {
             alert.setHeaderText(null);
             alert.show();
         }
+    }
+
+    public void editelo() {
+
     }
 
     public void regresar(){

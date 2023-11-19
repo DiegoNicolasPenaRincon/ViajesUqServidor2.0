@@ -72,6 +72,9 @@ public class VtnConsPaquetesController {
         }
     }
 
+    public void eliminar() {
+
+    }
     public void init(AnchorPane panel) {
         this.panel=panel;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

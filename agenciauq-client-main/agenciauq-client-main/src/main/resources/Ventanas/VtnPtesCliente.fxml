@@ -44,7 +44,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="btnCrearReserva" layoutX="364.0" layoutY="561.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: #E15700;" text="Crear Reserva" textFill="WHITE">
+      <Button fx:id="btnCrearReserva" layoutX="364.0" layoutY="561.0" mnemonicParsing="false" onAction="#abrirCrearReserva" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: #E15700;" text="Crear Reserva" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

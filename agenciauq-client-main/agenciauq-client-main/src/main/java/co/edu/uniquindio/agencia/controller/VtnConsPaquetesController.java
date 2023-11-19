@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
@@ -73,8 +74,17 @@ public class VtnConsPaquetesController {
     }
 
     public void eliminar() {
-
+        PaqueteTuristico paquete=tablaPtes.getSelectionModel().getSelectedItem();
+        try
+        {
+            agenciaViajes.eliminarPaqueteTuristico(paquete);
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
+
     public void init(AnchorPane panel) {
         this.panel=panel;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

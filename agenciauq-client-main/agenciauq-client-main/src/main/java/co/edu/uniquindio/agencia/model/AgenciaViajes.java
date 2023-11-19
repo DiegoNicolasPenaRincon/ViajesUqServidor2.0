@@ -425,7 +425,7 @@ public class AgenciaViajes {
         Persistencia_Serializacion.serializarObjetoXML(rutaDestinos,listaDestinos);
     }
 
-    public void eliminarDestinoPaquetes(int longitud,Destino destino) throws FileNotFoundException {
+    public void eliminarDestinoPaquetes(int longitud,Destino destino) throws FileNotFoundException, NoHayObjetoException {
         if(longitud<listaPaquetes.size())
         {
             if(listaPaquetes.get(longitud).getDestinos().contains(destino))
@@ -436,8 +436,8 @@ public class AgenciaViajes {
             {
                 eliminarDestinoPaquetes(longitud+1,destino);
             }
-        }
 
+        }
         Persistencia_Serializacion.serializarObjetoXML(rutaPaquetes,listaPaquetes);
     }
 

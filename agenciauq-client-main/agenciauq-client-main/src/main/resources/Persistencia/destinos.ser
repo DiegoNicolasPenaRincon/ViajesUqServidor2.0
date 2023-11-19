@@ -7,7 +7,7 @@
      <string>Quindio</string>
     </void>
     <void property="clima">
-     <object class="java.lang.Enum" id="Clima0" method="valueOf">
+     <object class="java.lang.Enum" method="valueOf">
       <class>co.edu.uniquindio.agencia.model.Clima</class>
       <string>CALIDO</string>
      </object>
@@ -36,88 +36,30 @@
   <void method="add">
    <object class="co.edu.uniquindio.agencia.model.Destino">
     <void property="ciudad">
-     <string>mexico</string>
+     <string>13131</string>
     </void>
     <void property="clima">
-     <object idref="Clima0"/>
-    </void>
-    <void property="descripcion">
-     <string>bacano</string>
-    </void>
-    <void property="nombre">
-     <string>cancun</string>
-    </void>
-    <void property="rutasImagenes">
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <string>prueba</string>
-      </void>
-      <void method="add">
-       <string>prueba</string>
-      </void>
-      <void method="add">
-       <string>prueba</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="co.edu.uniquindio.agencia.model.Destino">
-    <void property="ciudad">
-     <string>mexico 2</string>
-    </void>
-    <void property="clima">
-     <object class="java.lang.Enum" id="Clima1" method="valueOf">
+     <object class="java.lang.Enum" method="valueOf">
       <class>co.edu.uniquindio.agencia.model.Clima</class>
-      <string>FRIO</string>
+      <string>NEVADO</string>
      </object>
-    </void>
-    <void property="descripcion">
-     <string>31313131</string>
-    </void>
-    <void property="nombre">
-     <string>mexico</string>
-    </void>
-    <void property="rutasImagenes">
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <string>adad</string>
-      </void>
-      <void method="add">
-       <string>adad</string>
-      </void>
-      <void method="add">
-       <string>adada</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="co.edu.uniquindio.agencia.model.Destino">
-    <void property="ciudad">
-     <string>mexico 3</string>
-    </void>
-    <void property="clima">
-     <object idref="Clima1"/>
     </void>
     <void property="descripcion">
      <string>3131</string>
     </void>
     <void property="nombre">
-     <string>mexico</string>
+     <string>pruebalos</string>
     </void>
     <void property="rutasImagenes">
      <object class="java.util.ArrayList">
       <void method="add">
-       <string>3131</string>
+       <string>https://www.google.com/imgres?imgurl=https%3A%2F%2Fst.depositphotos.com%2F61704082%2F54293%2Fv%2F450%2Fdepositphotos_542939080-stock-illustration-cartoon-stickman-question-mark-stick.jpg&amp;tbnid=E0IwMxmJ9y_M1M&amp;vet=12ahUKEwizncGnuM-CAxWRbDABHSTlDroQMygRegUIARCVAQ..i&amp;imgrefurl=https%3A%2F%2Fdepositphotos.com%2Fes%2Fvector%2Fhand-drawn-stick-man-stand-thinking-pose-front-question-mark-542939088.html&amp;docid=G3tyNRnyFOZlWM&amp;w=600&amp;h=600&amp;q=signo%20de%20interrogacion&amp;client=opera-gx&amp;ved=2ahUKEwizncGnuM-CAxWRbDABHSTlDroQMygRegUIARCVAQ</string>
       </void>
       <void method="add">
-       <string>313</string>
+       <string>https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fes.dreamstime.com%2Fd-personaje-de-dibujos-animados-signo-interrogaci%25C3%25B3n-image115495804&amp;psig=AOvVaw0JwaIoNT9AWBVR86NkT4bQ&amp;ust=1700461887861000&amp;source=images&amp;cd=vfe&amp;opi=89978449&amp;ved=0CBEQjRxqFwoTCLCwg7S4z4IDFQAAAAAdAAAAABAY</string>
       </void>
       <void method="add">
-       <string>13131</string>
+       <string>https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fes.pngtree.com%2Ffree-png-vectors%2Fsigno-de-interrogacion&amp;psig=AOvVaw0JwaIoNT9AWBVR86NkT4bQ&amp;ust=1700461887861000&amp;source=images&amp;cd=vfe&amp;opi=89978449&amp;ved=0CBEQjRxqFwoTCLCwg7S4z4IDFQAAAAAdAAAAABAd</string>
       </void>
      </object>
     </void>

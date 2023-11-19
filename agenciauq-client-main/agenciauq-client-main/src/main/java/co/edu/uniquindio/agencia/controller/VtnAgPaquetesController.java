@@ -113,7 +113,7 @@ public class VtnAgPaquetesController {
                     DateInicio.getValue(),
                     DateFiinal.getValue(),
                     destinos);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Nuevo paquete creado.");
             alert.setHeaderText(null);
             alert.show();

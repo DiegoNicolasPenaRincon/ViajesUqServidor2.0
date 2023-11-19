@@ -96,7 +96,7 @@ public class VtnConsPaquetesController {
         try {
             if (agenciaViajes.verificarPaquete(paquete)){
             // Cargar el FXML de la nueva ventana
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnEditarPerfil.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnEditarPaquetes.fxml"));
             Pane nuevaVentana = loader.load();
             VtnEditarPaquetesController paquetesController=loader.getController();
 

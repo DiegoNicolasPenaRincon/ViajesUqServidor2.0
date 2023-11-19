@@ -410,26 +410,35 @@ public class AgenciaViajes {
 
     /**
      *
-     * @param nombre nombre del destino que se quiere eliminar
-     * @param ciudad ciudad del destino a eliminar
-     * @param longitud variable para recorrer el arraylist de destinos
+     * @param destino que se va a eliminar
      */
-    public void eliminarDestino(String nombre,String ciudad,int longitud,int verificador) {
-        if(longitud<listaDestinos.size())
+    public void eliminarDestino(Destino destino) throws NoHayObjetoException, FileNotFoundException {
+        if(listaDestinos.contains(destino))
         {
-            if(nombre.equals(listaDestinos.get(longitud).getNombre())&& ciudad.equals(listaDestinos.get(longitud).getCiudad())) {
-                listaDestinos.remove(longitud);
+            listaDestinos.remove(destino);
+        }
+        else
+        {
+            throw new NoHayObjetoException("El destino ya no se encuentra en nuestra base de datos");
+        }
+
+        Persistencia_Serializacion.serializarObjetoXML(rutaDestinos,listaDestinos);
+    }
+
+    public void eliminarDestinoPaquetes(int longitud,Destino destino) throws FileNotFoundException {
+        if(longitud<listaPaquetes.size())
+        {
+            if(listaPaquetes.get(longitud).getDestinos().contains(destino))
+            {
+                listaPaquetes.get(longitud).getDestinos().remove(destino);
             }
             else
             {
-                eliminarDestino(nombre,ciudad,longitud+1,verificador);
+                eliminarDestinoPaquetes(longitud+1,destino);
             }
         }
 
-        if(verificador==listaDestinos.size())
-        {
-            throw new DestinoNoEncontradoException("Ese destino no se encuentra registrado ");
-        }
+        Persistencia_Serializacion.serializarObjetoXML(rutaPaquetes,listaPaquetes);
     }
 
     /**

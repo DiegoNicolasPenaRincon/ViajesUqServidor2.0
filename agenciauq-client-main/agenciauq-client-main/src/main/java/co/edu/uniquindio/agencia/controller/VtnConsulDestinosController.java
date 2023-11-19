@@ -9,10 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -64,6 +61,29 @@ public class VtnConsulDestinosController {
 
         ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
         tablaDestinos.setItems(listaDestinos);
+    }
+
+    public void eliminar() {
+        Destino destino=tablaDestinos.getSelectionModel().getSelectedItem();
+        try
+        {
+            if (agenciaViajes.verificarDestino(destino))
+            {
+                agenciaViajes.eliminarDestino(destino);
+                agenciaViajes.eliminarDestinoPaquetes(0,destino);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("El destino se ha eliminado correctamente de nuestra base de datos, ademas, el destino ha sido retirado de todos los paquetes que lo incluian ");
+                alert.setHeaderText(null);
+                alert.show();
+            }
+        }
+        catch (Exception e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.setHeaderText(null);
+            alert.show();
+        }
     }
 
     public void regresar(){

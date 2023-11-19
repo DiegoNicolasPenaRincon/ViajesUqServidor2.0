@@ -42,7 +42,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnEliminar" layoutX="468.0" layoutY="334.0" mnemonicParsing="false" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+      <Button fx:id="btnEliminar" layoutX="468.0" layoutY="334.0" mnemonicParsing="false" onAction="#eliminar" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

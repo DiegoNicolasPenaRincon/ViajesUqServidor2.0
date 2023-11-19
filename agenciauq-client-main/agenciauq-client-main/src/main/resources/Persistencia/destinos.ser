@@ -123,37 +123,5 @@
     </void>
    </object>
   </void>
-  <void method="add">
-   <object class="co.edu.uniquindio.agencia.model.Destino">
-    <void property="ciudad">
-     <string>mexico 4</string>
-    </void>
-    <void property="clima">
-     <object class="java.lang.Enum" method="valueOf">
-      <class>co.edu.uniquindio.agencia.model.Clima</class>
-      <string>NEVADO</string>
-     </object>
-    </void>
-    <void property="descripcion">
-     <string>1313131</string>
-    </void>
-    <void property="nombre">
-     <string>mexico</string>
-    </void>
-    <void property="rutasImagenes">
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <string>3131</string>
-      </void>
-      <void method="add">
-       <string>3131</string>
-      </void>
-      <void method="add">
-       <string>3131</string>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
  </object>
 </java>

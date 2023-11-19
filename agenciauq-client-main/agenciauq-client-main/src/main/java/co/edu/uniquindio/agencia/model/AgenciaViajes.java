@@ -7,10 +7,7 @@ import utils.Persistencia_Serializacion;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -438,7 +435,7 @@ public class AgenciaViajes {
             }
 
         }
-        Persistencia_Serializacion.serializarObjetoXML(rutaPaquetes,listaPaquetes);
+        Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
     }
 
     /**

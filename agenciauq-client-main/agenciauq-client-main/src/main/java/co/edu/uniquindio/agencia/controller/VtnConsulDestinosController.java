@@ -111,6 +111,7 @@ public class VtnConsulDestinosController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
         }
+        VtnEditarDestinosController.destino=destino;
     }
 
 

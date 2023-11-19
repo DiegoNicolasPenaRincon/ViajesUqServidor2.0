@@ -2,6 +2,7 @@ package co.edu.uniquindio.agencia.controller;
 
 import co.edu.uniquindio.agencia.exceptions.SeleccionarElementoException;
 import co.edu.uniquindio.agencia.model.AgenciaViajes;
+import co.edu.uniquindio.agencia.model.Clientes;
 import co.edu.uniquindio.agencia.model.PaqueteTuristico;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -52,6 +53,7 @@ public class VtnPtesClienteController implements Initializable {
     private TableView<PaqueteTuristico> tablaDestinos;
 
     private AnchorPane panelVentana;
+    private Clientes cliente;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +80,7 @@ public class VtnPtesClienteController implements Initializable {
                     Pane nuevaVentana = loader.load();
 
                     VtnDllesPaquetesController dllesPaquetesController=loader.getController();
-                    dllesPaquetesController.init(panelVentana, paqueteSeleccionado);
+                    dllesPaquetesController.init(panelVentana, paqueteSeleccionado, cliente);
 
                     // Limpiar el contenido anterior y establecer el nuevo contenido
                     panelVentana.getChildren().clear();
@@ -95,7 +97,36 @@ public class VtnPtesClienteController implements Initializable {
         }
     }
 
-    public void init(AnchorPane panelVentana) {
+    public void init(AnchorPane panelVentana, Clientes cliente) {
         this.panelVentana=panelVentana;
+        this.cliente=cliente;
+    }
+
+    public void abrirCrearReserva(){
+        PaqueteTuristico paqueteSeleccionado=tablaDestinos.getSelectionModel().getSelectedItem();
+        try {
+            if(agenciaViajes.verificarPaquete(paqueteSeleccionado)){
+                try {
+                    // Cargar el FXML en el AnchorPane derecho
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnReservar.fxml"));
+                    Pane nuevaVentana = loader.load();
+
+                    VtnReservarController crearReserva=loader.getController();
+                    crearReserva.init(panelVentana, paqueteSeleccionado, cliente);
+
+
+                    // Limpiar el contenido anterior y establecer el nuevo contenido
+                    panelVentana.getChildren().clear();
+                    panelVentana.getChildren().add(nuevaVentana);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SeleccionarElementoException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.setHeaderText(null);
+            alert.show();
+        }
     }
 }

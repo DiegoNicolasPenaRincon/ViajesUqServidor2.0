@@ -1,6 +1,7 @@
 package co.edu.uniquindio.agencia.controller;
 
 import co.edu.uniquindio.agencia.model.AgenciaViajes;
+import co.edu.uniquindio.agencia.model.Clientes;
 import co.edu.uniquindio.agencia.model.Destino;
 import co.edu.uniquindio.agencia.model.PaqueteTuristico;
 import javafx.application.Platform;
@@ -69,9 +70,12 @@ public class VtnDllesPaquetesController {
     private AnchorPane panelVentana;
     private PaqueteTuristico paqueteSeleccionado;
 
-    public void init(AnchorPane panelVentana, PaqueteTuristico paqueteSeleccionado) {
+    private Clientes cliente;
+
+    public void init(AnchorPane panelVentana, PaqueteTuristico paqueteSeleccionado, Clientes cliente) {
         this.panelVentana = panelVentana;
         this.paqueteSeleccionado = paqueteSeleccionado;
+        this.cliente=cliente;
 
 
         lblNombre.setText(paqueteSeleccionado.getNombre());
@@ -148,10 +152,10 @@ public class VtnDllesPaquetesController {
     public void regresar(){
             try {
                 // Cargar el FXML de la nueva ventana
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnPtesClientes.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnPtesCliente.fxml"));
                 Pane nuevaVentana = loader.load();
                 VtnPtesClienteController ptesClienteController=loader.getController();
-                ptesClienteController.init(panelVentana);
+                ptesClienteController.init(panelVentana, cliente);
 
 
                 // Limpiar el contenido anterior y establecer el nuevo contenido

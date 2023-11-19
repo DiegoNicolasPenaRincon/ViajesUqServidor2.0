@@ -66,7 +66,7 @@ public class VtnClientesController {
             Pane nuevaVentana = loader.load();
 
             VtnPtesClienteController ptesClienteController=loader.getController();
-            ptesClienteController.init(panelVentana);
+            ptesClienteController.init(panelVentana, cliente);
 
             // Limpiar el contenido anterior y establecer el nuevo contenido
             panelVentana.getChildren().clear();

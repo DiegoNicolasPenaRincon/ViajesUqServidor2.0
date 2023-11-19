@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8" class="java.beans.XMLDecoder">
+<java version="20.0.2" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="co.edu.uniquindio.agencia.model.PaqueteTuristico">
     <void property="cupoMaximo">
-     <int>890</int>
+     <int>25</int>
     </void>
     <void property="destinos">
-     <object class="java.util.ArrayList" id="ArrayList0">
+     <object class="java.util.ArrayList">
       <void method="add">
        <object class="co.edu.uniquindio.agencia.model.Destino">
         <void property="ciudad">
          <string>Quindio</string>
         </void>
         <void property="clima">
-         <object class="java.lang.Enum" id="Clima0" method="valueOf">
+         <object class="java.lang.Enum" method="valueOf">
           <class>co.edu.uniquindio.agencia.model.Clima</class>
           <string>CALIDO</string>
          </object>
@@ -43,45 +43,16 @@
       <void method="add">
        <object class="co.edu.uniquindio.agencia.model.Destino">
         <void property="ciudad">
-         <string>mexico</string>
+         <string>mexico 3</string>
         </void>
         <void property="clima">
-         <object idref="Clima0"/>
-        </void>
-        <void property="descripcion">
-         <string>bacano</string>
-        </void>
-        <void property="nombre">
-         <string>cancun</string>
-        </void>
-        <void property="rutasImagenes">
-         <object class="java.util.ArrayList">
-          <void method="add">
-           <string>prueba</string>
-          </void>
-          <void method="add">
-           <string>prueba</string>
-          </void>
-          <void method="add">
-           <string>prueba</string>
-          </void>
-         </object>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="co.edu.uniquindio.agencia.model.Destino">
-        <void property="ciudad">
-         <string>mexico 2</string>
-        </void>
-        <void property="clima">
-         <object class="java.lang.Enum" id="Clima1" method="valueOf">
+         <object class="java.lang.Enum" method="valueOf">
           <class>co.edu.uniquindio.agencia.model.Clima</class>
           <string>FRIO</string>
          </object>
         </void>
         <void property="descripcion">
-         <string>31313131</string>
+         <string>3131</string>
         </void>
         <void property="nombre">
          <string>mexico</string>
@@ -89,13 +60,13 @@
         <void property="rutasImagenes">
          <object class="java.util.ArrayList">
           <void method="add">
-           <string>adad</string>
+           <string>3131</string>
           </void>
           <void method="add">
-           <string>adad</string>
+           <string>313</string>
           </void>
           <void method="add">
-           <string>adada</string>
+           <string>13131</string>
           </void>
          </object>
         </void>
@@ -106,117 +77,24 @@
     <void property="duracion">
      <int>1</int>
     </void>
-    <void property="nombre">
-     <string>nicolas</string>
-    </void>
-    <void property="precio">
-     <double>5.44545656546E11</double>
-    </void>
-    <void property="servicios">
-     <string>nada</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="co.edu.uniquindio.agencia.model.PaqueteTuristico">
-    <void property="cupoMaximo">
-     <int>890</int>
-    </void>
-    <void property="destinos">
-     <object idref="ArrayList0"/>
-    </void>
-    <void property="duracion">
-     <int>1</int>
-    </void>
-    <void property="nombre">
-     <string>bacano</string>
-    </void>
-    <void property="precio">
-     <double>5.44545656546E11</double>
-    </void>
-    <void property="servicios">
-     <string>nada</string>
-    </void>
-   </object>
-  </void>
-  <void method="add">
-   <object class="co.edu.uniquindio.agencia.model.PaqueteTuristico">
-    <void property="cupoMaximo">
-     <int>1313131</int>
-    </void>
-    <void property="destinos">
-     <object class="java.util.ArrayList">
-      <void method="add">
-       <object class="co.edu.uniquindio.agencia.model.Destino">
-        <void property="ciudad">
-         <string>mexico</string>
-        </void>
-        <void property="clima">
-         <object idref="Clima0"/>
-        </void>
-        <void property="descripcion">
-         <string>bacano</string>
-        </void>
-        <void property="nombre">
-         <string>cancun</string>
-        </void>
-        <void property="rutasImagenes">
-         <object class="java.util.ArrayList">
-          <void method="add">
-           <string>prueba</string>
-          </void>
-          <void method="add">
-           <string>prueba</string>
-          </void>
-          <void method="add">
-           <string>prueba</string>
-          </void>
-         </object>
-        </void>
-       </object>
-      </void>
-      <void method="add">
-       <object class="co.edu.uniquindio.agencia.model.Destino">
-        <void property="ciudad">
-         <string>mexico 2</string>
-        </void>
-        <void property="clima">
-         <object idref="Clima1"/>
-        </void>
-        <void property="descripcion">
-         <string>31313131</string>
-        </void>
-        <void property="nombre">
-         <string>mexico</string>
-        </void>
-        <void property="rutasImagenes">
-         <object class="java.util.ArrayList">
-          <void method="add">
-           <string>adad</string>
-          </void>
-          <void method="add">
-           <string>adad</string>
-          </void>
-          <void method="add">
-           <string>adada</string>
-          </void>
-         </object>
-        </void>
-       </object>
-      </void>
+    <void property="fechaFin">
+     <object class="java.time.LocalDate" method="parse">
+      <string>2023-11-22</string>
      </object>
     </void>
-    <void property="duracion">
-     <int>1</int>
+    <void property="fechaInicio">
+     <object class="java.time.LocalDate" method="parse">
+      <string>2023-11-08</string>
+     </object>
     </void>
     <void property="nombre">
-     <string>bodrio</string>
+     <string>Eje Cafetero</string>
     </void>
     <void property="precio">
-     <double>89.0</double>
+     <double>200000.0</double>
     </void>
     <void property="servicios">
-     <string>313131</string>
+     <string>Hospedaje, Alimentación</string>
     </void>
    </object>
   </void>

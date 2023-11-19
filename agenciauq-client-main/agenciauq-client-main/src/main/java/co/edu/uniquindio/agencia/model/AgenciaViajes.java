@@ -367,12 +367,16 @@ public class AgenciaViajes {
     }
 
     public void verificarURLS(String texto1, String texto2, String texto3) throws CampoObligatorioException {
-        if(texto1.isBlank() && texto2.isBlank() && texto3.isBlank()){
-            log.severe("Debe subir almenos una imagen del destino");
-            throw new CampoObligatorioException("Debe subir almenos una imagen del destino");
+        if(texto1.isBlank() || texto2.isBlank() || texto3.isBlank()){
+            log.severe("Debe subir 3 fotos del destino");
+            throw new CampoObligatorioException("Debe subir 3 fotos del destino");
         }
     }
 
+    public void crearReserva(Clientes cliente, PaqueteTuristico paquete,
+                             LocalDate fechaViaje, String numPersonas){
+
+    }
     //Metodos relacionados con los adminsitradores
 
     //Metodos relacionados con los destinos

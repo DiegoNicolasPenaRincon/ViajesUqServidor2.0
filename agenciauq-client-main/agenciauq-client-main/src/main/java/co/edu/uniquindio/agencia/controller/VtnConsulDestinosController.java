@@ -1,5 +1,6 @@
 package co.edu.uniquindio.agencia.controller;
 
+import co.edu.uniquindio.agencia.exceptions.SeleccionarElementoException;
 import co.edu.uniquindio.agencia.model.AgenciaViajes;
 import co.edu.uniquindio.agencia.model.Clima;
 import co.edu.uniquindio.agencia.model.Destino;
@@ -87,8 +88,31 @@ public class VtnConsulDestinosController {
     }
 
     public void editelo() {
+        Destino destino=tablaDestinos.getSelectionModel().getSelectedItem();
 
+            try {
+                if(agenciaViajes.verificarDestino(destino)){
+                // Cargar el FXML de la nueva ventana
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnEditarDestinos.fxml"));
+                Pane nuevaVentana = loader.load();
+                VtnEditarDestinosController editarDestinoController=loader.getController();
+                editarDestinoController.init(panel);
+
+
+                // Limpiar el contenido anterior y establecer el nuevo contenido
+                panel.getChildren().clear();
+                panel.getChildren().add(nuevaVentana);
+            }
+            } catch (SeleccionarElementoException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(e.getMessage());
+                alert.setHeaderText(null);
+                alert.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+        }
     }
+
 
     public void regresar(){
         try {

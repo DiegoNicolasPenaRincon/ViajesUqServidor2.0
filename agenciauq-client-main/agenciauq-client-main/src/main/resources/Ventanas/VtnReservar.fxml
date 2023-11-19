@@ -91,7 +91,7 @@
          </font>
       </Label>
       <Label fx:id="lblPrecio" layoutX="433.0" layoutY="128.0" prefHeight="17.0" prefWidth="75.0" text="Label" />
-      <Button fx:id="btnRegresar" layoutX="471.0" layoutY="340.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #1e90ff;" text="Regresar" textFill="WHITE">
+      <Button fx:id="btnRegresar" layoutX="471.0" layoutY="340.0" mnemonicParsing="false" onAction="#regresar" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #1e90ff;" text="Regresar" textFill="WHITE">
          <font>
             <Font name="Weather Icons Regular" size="12.0" />
          </font>

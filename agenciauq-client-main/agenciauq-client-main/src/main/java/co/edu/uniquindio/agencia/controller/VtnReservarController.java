@@ -1,17 +1,23 @@
 package co.edu.uniquindio.agencia.controller;
 
+import co.edu.uniquindio.agencia.exceptions.CampoObligatorioException;
+import co.edu.uniquindio.agencia.exceptions.MalaFechaException;
+import co.edu.uniquindio.agencia.exceptions.ValorInvalidoException;
 import co.edu.uniquindio.agencia.model.AgenciaViajes;
 import co.edu.uniquindio.agencia.model.Clientes;
 import co.edu.uniquindio.agencia.model.GuiasTuristicos;
 import co.edu.uniquindio.agencia.model.PaqueteTuristico;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class VtnReservarController {
@@ -27,7 +33,7 @@ public class VtnReservarController {
     private TextArea txtGuia;
 
     @FXML
-    private ComboBox<GuiasTuristicos> boxGuia;
+    private ComboBox<String> boxGuia;
 
     @FXML
     private Label lblPrecio;
@@ -56,6 +62,14 @@ public class VtnReservarController {
                 lblPrecio.setText(String.valueOf(paquete.getPrecio()*newValue));
             }
         });
+
+        ObservableList<String> opciones = FXCollections.observableArrayList();
+        opciones.add("No");
+        for (GuiasTuristicos guia : agenciaViajes.getListaGuias()) {
+            opciones.add(guia.getNombre());
+        }
+        boxGuia.setItems(opciones);
+        boxGuia.getSelectionModel().select(0);
     }
 
     public void regresar(){
@@ -76,11 +90,31 @@ public class VtnReservarController {
     }
 
     public void crearReserva(){
+        try{
         agenciaViajes.crearReserva(
                 cliente,
                 paquete,
                 DateInicio.getValue(),
-                String.valueOf(txtNumPersonas.getValue()));
+                String.valueOf(txtNumPersonas.getValue()),
+                boxGuia.getValue(),
+                lblPrecio.getText());
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Nueva Reserva Creada.");
+            alert.setHeaderText(null);
+            alert.show();
+            regresar();
+        }catch(CampoObligatorioException | MalaFechaException | ValorInvalidoException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.setHeaderText(null);
+            alert.show();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
+
+
 }

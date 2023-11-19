@@ -1,12 +1,15 @@
 package co.edu.uniquindio.agencia.model;
 
 import co.edu.uniquindio.agencia.exceptions.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import utils.Persistencia_Serializacion;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -23,6 +26,7 @@ public class AgenciaViajes {
     private ArrayList<Destino> listaDestinos;
     @Getter
     private ArrayList<PaqueteTuristico> listaPaquetes;
+    @Getter
     private ArrayList<GuiasTuristicos> listaGuias;
     private ArrayList<Reservas> listaReservas;
     private static final Logger LOGGER= Logger.getLogger(AgenciaViajes.class.getName());
@@ -374,9 +378,58 @@ public class AgenciaViajes {
     }
 
     public void crearReserva(Clientes cliente, PaqueteTuristico paquete,
-                             LocalDate fechaViaje, String numPersonas){
+                             LocalDate fechaViaje, String numPersonas, String guia, String precioTotal) throws CampoObligatorioException, MalaFechaException, ValorInvalidoException, FileNotFoundException {
+        if (cliente == null || paquete == null || fechaViaje == null || numPersonas == null || guia==null) {
+            log.warning("Hay datos incompletos para hacer la reserva");
+            throw new CampoObligatorioException("Hay datos incompletos para hacer la reserva");
+        }
+        LocalDate fechaActual=LocalDate.now();
+        if(fechaViaje.isBefore(fechaActual)){
+            log.warning("El viaje no puede ser en una fecha anterior a la actual");
+            throw new MalaFechaException("El viaje no puede ser en una fecha anterior a la actual");
+        }
+        if(!numPersonas.matches("\\d+")){
+            log.warning("El número de personas debe ser un valor numerico");
+            throw new ValorInvalidoException("El número de personas debe ser un valor numerico");
+        }
+        GuiasTuristicos guiaTuristico = null;
+        if(!guia.equals("No")){
+             guiaTuristico=buscarGuiaTuristico(guia, 0);
+        }
 
+        int personas=Integer.parseInt(numPersonas);
+        double precio=Double.parseDouble(precioTotal);
+
+        Reservas reserva=Reservas.builder()
+                .cliente(cliente)
+                .paquete(paquete)
+                .fechaSolicitud(fechaActual)
+                .fechaViaje(fechaViaje)
+                .numPersonas(personas)
+                .guiaTuristico(guiaTuristico)
+                .estado(EstadoReserva.PENDIENTE)
+                .precioTotal(precio)
+                .build();
+        listaReservas.add(reserva);
+        Persistencia_Serializacion.serializarObjetoXML2(rutaReservas,listaReservas);
     }
+
+    public GuiasTuristicos buscarGuiaTuristico(String nombreGuia, int indice){
+        if (indice >= 0 && indice < listaGuias.size()) {
+            GuiasTuristicos guia = listaGuias.get(indice);
+            if (guia.getNombre().equals(nombreGuia)) {
+                // Se encontró el guía con el nombre dado
+                return guia;
+            } else {
+                // Llamada recursiva para buscar en el siguiente índice
+                return buscarGuiaTuristico(nombreGuia, indice + 1);
+            }
+        } else {
+            // No se encontró ningún guía con el nombre dado
+            return null;
+        }
+    }
+
     //Metodos relacionados con los adminsitradores
 
     //Metodos relacionados con los destinos

@@ -17,4 +17,6 @@ public class Reservas implements Serializable {
     private int numPersonas;
     private PaqueteTuristico paquete;
     private EstadoReserva estado;
+    private GuiasTuristicos guiaTuristico;
+    private double precioTotal;
 }

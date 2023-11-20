@@ -96,7 +96,7 @@ public class VtnReservasController {
 
                         agenciaViajes.cancelarReserva(reserva);
 
-                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
                         alert2.setContentText("Reserva cancelada");
                         alert2.setHeaderText(null);
                         alert2.show();

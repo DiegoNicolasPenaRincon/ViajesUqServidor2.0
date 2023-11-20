@@ -63,7 +63,7 @@
             <Font name="Gabriola" size="30.0" />
          </font>
       </Label>
-      <Button fx:id="btnEditar" layoutX="147.0" layoutY="383.0" mnemonicParsing="false" onAction="#mostrarEditarPerfil" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #5E17EB;" text="Editar Perfil" textFill="WHITE">
+      <Button fx:id="btnEditar" layoutX="146.0" layoutY="346.0" mnemonicParsing="false" onAction="#mostrarEditarPerfil" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #5E17EB;" text="Editar Perfil" textFill="WHITE">
          <font>
             <Font name="Weather Icons Regular" size="12.0" />
          </font>
@@ -74,5 +74,10 @@
          </font>
       </Label>
       <Label fx:id="lblCedula" layoutX="258.0" layoutY="191.0" text="Label" />
+      <Button fx:id="regresar" layoutX="147.0" layoutY="394.0" mnemonicParsing="false" onAction="#regresar" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #96C6E0;" text="Regresar" textFill="WHITE">
+         <font>
+            <Font name="Weather Icons Regular" size="12.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

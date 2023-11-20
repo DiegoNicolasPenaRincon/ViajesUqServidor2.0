@@ -37,7 +37,7 @@
             <TableColumn fx:id="colNombre" prefWidth="75.0" style="-fx-background-color: #E15700;" text="Nombre" />
             <TableColumn fx:id="colCupos" prefWidth="118.66671752929688" style="-fx-background-color: #E15700;" text="Cupos Disponibles" />
             <TableColumn fx:id="colFechaFinal" prefWidth="124.66668701171875" style="-fx-background-color: #E15700;" text="Fecha Final" />
-            <TableColumn fx:id="colFechaInicio" prefWidth="116.66668701171875" text="Fecha Inicio" />
+            <TableColumn fx:id="colFechaInicio" prefWidth="116.66668701171875" style="-fx-background-color: #E15700;" text="Fecha Inicio" />
             <TableColumn fx:id="colPrecio" minWidth="6.00006103515625" prefWidth="76.0" style="-fx-background-color: #E15700;" text="Precio" />
          </columns>
          <columnResizePolicy>
@@ -49,9 +49,14 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnDetalles" layoutX="137.0" layoutY="561.0" mnemonicParsing="false" onAction="#verDetalles" style="-fx-background-color: gray;" text="Ver Detalles" textFill="WHITE">
+      <Button fx:id="btnDetalles" layoutX="252.0" layoutY="560.0" mnemonicParsing="false" onAction="#verDetalles" style="-fx-background-color: gray;" text="Ver Detalles" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="regresar" layoutX="103.0" layoutY="559.0" mnemonicParsing="false" onAction="#regresar" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #96C6E0;" text="Regresar" textFill="WHITE">
+         <font>
+            <Font name="Weather Icons Regular" size="12.0" />
          </font>
       </Button>
    </children>

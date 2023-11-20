@@ -29,12 +29,12 @@ public class AgenciaViajes {
     private ArrayList<Reservas> listaReservas;
     private static final Logger LOGGER= Logger.getLogger(AgenciaViajes.class.getName());
     private static AgenciaViajes AgenciaViajes;
-    private static final String rutaClientes="src/main/resources/Persistencia/clientes.txt";
-    private static final String rutaAdministradores="src/main/resources/Persistencia/administradores.txt";
-    private static final String rutaDestinos="src/main/resources/Persistencia/destinos.ser";
-    private static final String rutaPaquetes="src/main/resources/Persistencia/paqueteTuristico.ser";
-    private static final String rutaGuias="src/main/resources/Persistencia/guiasTuristicos.ser";
-    private static final String rutaReservas="src/main/resources/Persistencia/reservas.ser";
+    public final String rutaClientes="src/main/resources/Persistencia/clientes.txt";
+    public final String rutaAdministradores="src/main/resources/Persistencia/administradores.txt";
+    public final String rutaDestinos="src/main/resources/Persistencia/destinos.ser";
+    public final String rutaPaquetes="src/main/resources/Persistencia/paqueteTuristico.ser";
+    public final String rutaGuias="src/main/resources/Persistencia/guiasTuristicos.ser";
+    public final String rutaReservas="src/main/resources/Persistencia/reservas.ser";
 
     private AgenciaViajes()  {
         crearLogger();
@@ -498,6 +498,12 @@ public class AgenciaViajes {
         {
             throw new CampoObligatorioException("El destino debe de tener por lo menos una imagen que lo caracterice");
         }
+
+        if(clima==null)
+        {
+            throw new CampoObligatorioException("Debe especificar el clima del destino");
+        }
+
         validarDestinosIguales(nombre,0,ciudad);
         Destino destino=Destino.builder()
                 .nombre(nombre)
@@ -533,14 +539,35 @@ public class AgenciaViajes {
             if(listaPaquetes.get(longitud).getDestinos().contains(destino))
             {
                 listaPaquetes.get(longitud).getDestinos().remove(destino);
+                mensajeInformativo("el destino ha sido eliminado");
             }
             else
             {
                 eliminarDestinoPaquetes(longitud+1,destino);
             }
-
         }
-        Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
+    }
+
+    public void agregarDestinoPaquete(int longitud,Destino destino,PaqueteTuristico paquete) throws FileNotFoundException {
+        if(longitud<listaPaquetes.size())
+        {
+            if(paquete.equals(listaPaquetes.get(longitud)))
+            {
+                if(!paquete.getDestinos().contains(destino))
+                {
+                    listaPaquetes.get(longitud).getDestinos().add(destino);
+                    longitud=listaPaquetes.size();
+                }
+                else
+                {
+                    longitud=listaPaquetes.size();
+                }
+            }
+            else
+            {
+                agregarDestinoPaquete(longitud+1,destino,paquete);
+            }
+        }
     }
 
     /**
@@ -592,7 +619,8 @@ public class AgenciaViajes {
                     }
                 }
 
-                modificarDestinoPaquete(0,destino);
+                modificarDestinoPaquete(0,listaDestinos.get(longitud),destino,0);
+                longitud=listaDestinos.size();
             }
             else
             {
@@ -600,20 +628,28 @@ public class AgenciaViajes {
             }
 
             Persistencia_Serializacion.serializarObjetoXML(rutaDestinos,listaDestinos);
+            Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
         }
     }
 
-    public void modificarDestinoPaquete(int longitud, Destino destino) {
+    public void modificarDestinoPaquete(int longitud, Destino destino,Destino destino1,int longitud2) throws FileNotFoundException {
         if(longitud<listaPaquetes.size())
         {
-            if(listaPaquetes.get(longitud).getDestinos().contains(destino))
+            if(longitud2<listaPaquetes.get(longitud).getDestinos().size())
             {
-                int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino);
-                listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+                if(destino1.equals(listaPaquetes.get(longitud).getDestinos().get(longitud2)))
+                {
+                    int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino1);
+                    listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+                }
+                else
+                {
+                    modificarDestinoPaquete(longitud,destino,destino1,longitud2+1);
+                }
             }
             else
             {
-                modificarDestinoPaquete(longitud+1,destino);
+                modificarDestinoPaquete(longitud+1,destino,destino1,longitud2=0);
             }
         }
     }
@@ -736,12 +772,86 @@ public class AgenciaViajes {
     }
 
 
-    public void agregarDestinoAlPaquete(ArrayList<Destino> destinos,int longitud,PaqueteTuristico paquete) {
-        if(longitud<destinos.size())
+    public ArrayList<Destino> mostrarDestinosPaquete(int longitud,PaqueteTuristico paquete,ArrayList<Destino> destinos) {
+        if(longitud<listaDestinos.size())
         {
-            paquete.getDestinos().add(destinos.get(longitud));
-            agregarDestinoAlPaquete(destinos,longitud+1,paquete);
+            if(!paquete.getDestinos().contains(listaDestinos.get(longitud)))
+            {
+                destinos.add(listaDestinos.get(longitud));
+                return mostrarDestinosPaquete(longitud+1,paquete,destinos);
+            }
+            else
+            {
+                return mostrarDestinosPaquete(longitud+1,paquete,destinos);
+            }
         }
+        else
+        {
+            return destinos;
+        }
+    }
+
+    public void modificarPaquete2(int longitud,PaqueteTuristico paquete,String nuevoNombre,String nuevosServicios,String nuevaDuracion,String nuevoPrecio,String nuevoCupoMaximo,LocalDate nuevoInicio,LocalDate nuevoFinal) throws FileNotFoundException, MalaFechaException, NegativosException {
+        validarNumerosNegativos(Integer.parseInt(nuevaDuracion),"la duracion no puede ser negativa");
+        if(longitud<listaPaquetes.size())
+        {
+            if (paquete.equals(listaPaquetes.get(longitud)))
+            {
+                if(nuevoNombre!=null&&!nuevoNombre.isEmpty())
+                {
+                    listaPaquetes.get(longitud).setNombre(nuevoNombre);
+                    System.out.println(listaPaquetes.get(longitud).getNombre());
+                }
+
+                if(nuevosServicios!=null&&!nuevosServicios.isEmpty())
+                {
+                    listaPaquetes.get(longitud).setServicios(nuevosServicios);
+                }
+
+                if(nuevaDuracion==null&&!nuevaDuracion.isEmpty())
+                {
+                    listaPaquetes.get(longitud).setDuracion(Integer.parseInt(nuevaDuracion));
+                }
+
+                if(nuevoPrecio!=null&&!nuevoPrecio.isEmpty())
+                {
+                    validarNumerosNegativos(Integer.parseInt(nuevoPrecio),"el precio no puede ser menor que 0");
+                    listaPaquetes.get(longitud).setPrecio(Double.parseDouble(nuevoPrecio));
+                }
+
+                if(nuevoCupoMaximo!=null&&!nuevoCupoMaximo.isEmpty())
+                {
+                    validarNumerosNegativos(Integer.parseInt(nuevoCupoMaximo),"el cupo maximo no puede manejar valores engativos");
+                    listaPaquetes.get(longitud).setCupoMaximo(Integer.parseInt(nuevoCupoMaximo));
+                }
+
+                if(nuevoInicio!=null&&nuevoFinal==null)
+                {
+                    validarFechas(nuevoInicio,listaPaquetes.get(longitud).getFechaFin());
+                    listaPaquetes.get(longitud).setFechaInicio(nuevoInicio);
+                }
+
+                if(nuevoFinal!=null&&nuevoInicio==null)
+                {
+                    validarFechas(listaPaquetes.get(longitud).getFechaInicio(),nuevoFinal);
+                    listaPaquetes.get(longitud).setFechaFin(nuevoFinal);
+                }
+
+                if(nuevoFinal!=null&&nuevoInicio!=null)
+                {
+                    validarFechas(nuevoInicio,nuevoFinal);
+                    listaPaquetes.get(longitud).setFechaInicio(nuevoInicio);
+                    listaPaquetes.get(longitud).setFechaFin(nuevoFinal);
+                }
+
+                longitud=listaPaquetes.size();
+            }
+            else
+            {
+                modificarPaquete2(longitud+1,paquete,nuevoNombre,nuevosServicios,nuevaDuracion,nuevoPrecio,nuevoCupoMaximo,nuevoInicio,nuevoFinal);
+            }
+        }
+        Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
     }
 
     /**

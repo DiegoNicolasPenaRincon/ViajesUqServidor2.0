@@ -76,6 +76,9 @@ public class VtnConsulDestinosController {
                 alert.setContentText("El destino se ha eliminado correctamente de nuestra base de datos, ademas, el destino ha sido retirado de todos los paquetes que lo incluian ");
                 alert.setHeaderText(null);
                 alert.show();
+
+                ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
+                tablaDestinos.setItems(listaDestinos);
             }
         }
         catch (Exception e)

@@ -78,6 +78,11 @@ public class VtnConsPaquetesController {
         try
         {
             agenciaViajes.eliminarPaqueteTuristico(paquete);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("El destino ha sido eliminado con exito");
+            alert.setHeaderText(null);
+            alert.show();
         }
         catch (FileNotFoundException e)
         {

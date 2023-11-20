@@ -492,7 +492,6 @@ public class AgenciaViajes {
             {
                 listaPaquetes.get(longitud).getDestinos().remove(destino);
                 mensajeInformativo("el destino ha sido eliminado");
-                longitud=listaPaquetes.size();
             }
             else
             {

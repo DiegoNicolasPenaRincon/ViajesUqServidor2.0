@@ -1,5 +1,7 @@
 package co.edu.uniquindio.agencia.controller;
 
+import co.edu.uniquindio.agencia.exceptions.MalaFechaException;
+import co.edu.uniquindio.agencia.exceptions.NegativosException;
 import co.edu.uniquindio.agencia.model.AgenciaViajes;
 import co.edu.uniquindio.agencia.model.Destino;
 import co.edu.uniquindio.agencia.model.PaqueteTuristico;
@@ -11,12 +13,28 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import utils.Persistencia_Serializacion;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class VtnEditarPaquetesController {
 
-    private final AgenciaViajes agenciaViajes=AgenciaViajes.getInstance();
+    private final AgenciaViajes agenciaViajes = AgenciaViajes.getInstance();
+
+    @FXML
+    private TableColumn<Destino, String> colNombre1;
+
+    @FXML
+    private TableColumn<Destino, String> colCiudad1;
+
+    @FXML
+    private TableColumn<Destino, String> colClima1;
+
+    @FXML
+    private TableView<Destino> TableDestinosPaquete;
+
     @FXML
     private DatePicker DateFinal;
 
@@ -33,7 +51,7 @@ public class VtnEditarPaquetesController {
     private Button btnAgDestinos;
 
     @FXML
-    private Button btnAgDestinos1;
+    private Button btnElimianrDestino;
 
     @FXML
     private Button btnAgregar;
@@ -70,7 +88,7 @@ public class VtnEditarPaquetesController {
     public void init(PaqueteTuristico paquete, AnchorPane panel) {
         this.paquete=paquete;
         this.panel=panel;
-        this.nombreAntiguo=paquete.getNombre();
+        //this.nombreAntiguo=paquete.getNombre();
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 1, Integer.MAX_VALUE, paquete.getDuracion()); // Rango y valor inicial
         txtDuracion.setValueFactory(valueFactory);
@@ -80,29 +98,59 @@ public class VtnEditarPaquetesController {
         colClima.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getClima().name()));
 
-        ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
-        TableDestinos.setItems(listaDestinos);
+        colNombre1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        colCiudad1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCiudad()));
+        colClima1.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getClima().name()));
 
-        txtNombre.setText(paquete.getNombre());
+        ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
+        int indicePaquete=agenciaViajes.getListaPaquetes().indexOf(paquete);
+        ObservableList<Destino> listaDestinosPaquetes=FXCollections.observableArrayList(agenciaViajes.getListaPaquetes().get(indicePaquete).getDestinos());
+        TableDestinos.setItems(listaDestinos);
+        TableDestinosPaquete.setItems(listaDestinosPaquetes);
+
+       /* txtNombre.setText(paquete.getNombre());
         txtCaracteristicas.setText(paquete.getServicios());
         txtCupo.setText(String.valueOf(paquete.getCupoMaximo()));
         TxtPrecio.setText(String.valueOf(paquete.getPrecio()));
 
-
-
-    }
-    /*public void editarPaquete(){
-        agenciaViajes.modificarPaquete(
-                nombreAntiguo,
-                txtNombre.getText(),
-                txtCaracteristicas.getText(),
-                TxtPrecio.getText()
-
-
-        )
+        */
     }
 
-     */
+    public void editarPaquete(){
+        try
+        {
+            String apoyoDuracion=""+txtDuracion.getValue();
+            agenciaViajes.modificarPaquete2(0,paquete,txtNombre.getText(),"pruebelos",apoyoDuracion,TxtPrecio.getText(),txtCupo.getText(),DateInicio.getValue(),DateFinal.getValue());
+            System.out.print(txtNombre.getText());
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Se han cambiado o conservado los atributos del paquete.");
+            alert.setHeaderText(null);
+            alert.show();
+
+            Persistencia_Serializacion.serializarObjetoXMLConLocalDate(agenciaViajes.rutaPaquetes,agenciaViajes.getListaPaquetes());
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+        catch (MalaFechaException ex)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(ex.getMessage());
+            alert.setHeaderText(null);
+            alert.show();
+        }
+        catch (NegativosException e)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("ni el precio, ni la duracion del paquete, ni el cupo maximo del paquete, pueden ser valores negativos");
+            alert.setHeaderText(null);
+            alert.show();
+        }
+
+    }
 
     public void regresar(){
         try {
@@ -122,5 +170,75 @@ public class VtnEditarPaquetesController {
         }
 }
 
+    public void eliminarDestino() {
+        Destino destino=TableDestinosPaquete.getSelectionModel().getSelectedItem();
+        if(destino!=null)
+        {
+            try
+            {
+                agenciaViajes.eliminarDestinoPaquetes(0,destino);
+
+                ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
+                int indicePaquete=agenciaViajes.getListaPaquetes().indexOf(paquete);
+                ObservableList<Destino> listaDestinosPaquetes=FXCollections.observableArrayList(agenciaViajes.getListaPaquetes().get(indicePaquete).getDestinos());
+                TableDestinos.setItems(listaDestinos);
+                TableDestinosPaquete.setItems(listaDestinosPaquetes);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("El destino se ha eliminado con exitos");
+                alert.setHeaderText(null);
+                alert.show();
+
+            }
+            catch (FileNotFoundException e)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Estamos teniendo problemas con nuestra base de datos");
+                alert.setHeaderText(null);
+                alert.show();
+            }
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Seleccione el destino que desea eliminar");
+            alert.setHeaderText(null);
+            alert.show();
+        }
+    }
+
+    public void agregarDestino() {
+        Destino destino=TableDestinos.getSelectionModel().getSelectedItem();
+        if(destino!=null)
+        {
+            try
+            {
+                agenciaViajes.agregarDestinoPaquete(0,destino);
+
+                ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
+                int indicePaquete=agenciaViajes.getListaPaquetes().indexOf(paquete);
+                ObservableList<Destino> listaDestinosPaquetes=FXCollections.observableArrayList(agenciaViajes.getListaPaquetes().get(indicePaquete).getDestinos());
+                TableDestinos.setItems(listaDestinos);
+                TableDestinosPaquete.setItems(listaDestinosPaquetes);
+
+            }
+            catch (FileNotFoundException e)
+            {
+                throw new RuntimeException(e);
+            }
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("El destino se ha agregado con exito");
+            alert.setHeaderText(null);
+            alert.show();
+        }
+        else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Seleccione el destino que desea agregar");
+            alert.setHeaderText(null);
+            alert.show();
+        }
+    }
 }
 

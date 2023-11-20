@@ -122,7 +122,6 @@ public class VtnEditarPaquetesController {
         {
             String apoyoDuracion=""+txtDuracion.getValue();
             agenciaViajes.modificarPaquete2(0,paquete,txtNombre.getText(),"pruebelos",apoyoDuracion,TxtPrecio.getText(),txtCupo.getText(),DateInicio.getValue(),DateFinal.getValue());
-            System.out.print(txtNombre.getText());
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Se han cambiado o conservado los atributos del paquete.");
@@ -213,24 +212,23 @@ public class VtnEditarPaquetesController {
         {
             try
             {
-                agenciaViajes.agregarDestinoPaquete(0,destino);
-
+                agenciaViajes.agregarDestinoPaquete(0,destino,paquete);
                 ObservableList<Destino> listaDestinos = FXCollections.observableArrayList(agenciaViajes.getListaDestinos());
                 int indicePaquete=agenciaViajes.getListaPaquetes().indexOf(paquete);
                 ObservableList<Destino> listaDestinosPaquetes=FXCollections.observableArrayList(agenciaViajes.getListaPaquetes().get(indicePaquete).getDestinos());
                 TableDestinos.setItems(listaDestinos);
                 TableDestinosPaquete.setItems(listaDestinosPaquetes);
 
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("El destino se ha agregado con exito");
+                alert.setHeaderText(null);
+                alert.show();
             }
             catch (FileNotFoundException e)
             {
                 throw new RuntimeException(e);
             }
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("El destino se ha agregado con exito");
-            alert.setHeaderText(null);
-            alert.show();
         }
         else
         {

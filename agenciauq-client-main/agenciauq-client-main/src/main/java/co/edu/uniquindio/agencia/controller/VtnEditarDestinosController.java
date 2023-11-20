@@ -108,6 +108,11 @@ public class VtnEditarDestinosController {
             }
             agenciaViajes.modificarDestinos(destino,0,txtDescripcion.getText(),imagenesNuevas,boxClima.getValue(),txtNombre.getText(),txtCiudad.getText(),boxEleccion.getValue());
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("El destino ha sido modificado con exito");
+            alert.setHeaderText(null);
+            alert.show();
+
 
         }
         catch (Exception e)

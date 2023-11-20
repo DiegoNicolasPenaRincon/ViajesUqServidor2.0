@@ -450,6 +450,12 @@ public class AgenciaViajes {
         {
             throw new CampoObligatorioException("El destino debe de tener por lo menos una imagen que lo caracterice");
         }
+
+        if(clima==null)
+        {
+            throw new CampoObligatorioException("Debe especificar el clima del destino");
+        }
+
         validarDestinosIguales(nombre,0,ciudad);
         Destino destino=Destino.builder()
                 .nombre(nombre)
@@ -486,6 +492,7 @@ public class AgenciaViajes {
             {
                 listaPaquetes.get(longitud).getDestinos().remove(destino);
                 mensajeInformativo("el destino ha sido eliminado");
+                longitud=listaPaquetes.size();
             }
             else
             {
@@ -494,17 +501,24 @@ public class AgenciaViajes {
         }
     }
 
-    public void agregarDestinoPaquete(int longitud,Destino destino) throws FileNotFoundException {
+    public void agregarDestinoPaquete(int longitud,Destino destino,PaqueteTuristico paquete) throws FileNotFoundException {
         if(longitud<listaPaquetes.size())
         {
-            if(!listaPaquetes.get(longitud).getDestinos().contains(destino))
+            if(paquete.equals(listaPaquetes.get(longitud)))
             {
-                listaPaquetes.get(longitud).getDestinos().add(destino);
-                longitud=listaPaquetes.size();
+                if(!paquete.getDestinos().contains(destino))
+                {
+                    listaPaquetes.get(longitud).getDestinos().add(destino);
+                    longitud=listaPaquetes.size();
+                }
+                else
+                {
+                    longitud=listaPaquetes.size();
+                }
             }
             else
             {
-                agregarDestinoPaquete(longitud+1,destino);
+                agregarDestinoPaquete(longitud+1,destino,paquete);
             }
         }
     }
@@ -558,7 +572,7 @@ public class AgenciaViajes {
                     }
                 }
 
-                modificarDestinoPaquete(0,destino);
+                modificarDestinoPaquete(0,listaDestinos.get(longitud),destino,0);
                 longitud=listaDestinos.size();
             }
             else
@@ -567,20 +581,28 @@ public class AgenciaViajes {
             }
 
             Persistencia_Serializacion.serializarObjetoXML(rutaDestinos,listaDestinos);
+            Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
         }
     }
 
-    public void modificarDestinoPaquete(int longitud, Destino destino) {
+    public void modificarDestinoPaquete(int longitud, Destino destino,Destino destino1,int longitud2) throws FileNotFoundException {
         if(longitud<listaPaquetes.size())
         {
-            if(listaPaquetes.get(longitud).getDestinos().contains(destino))
+            if(longitud2<listaPaquetes.get(longitud).getDestinos().size())
             {
-                int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino);
-                listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+                if(destino1.equals(listaPaquetes.get(longitud).getDestinos().get(longitud2)))
+                {
+                    int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino1);
+                    listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+                }
+                else
+                {
+                    modificarDestinoPaquete(longitud,destino,destino1,longitud2+1);
+                }
             }
             else
             {
-                modificarDestinoPaquete(longitud+1,destino);
+                modificarDestinoPaquete(longitud+1,destino,destino1,longitud2=0);
             }
         }
     }

@@ -2,15 +2,13 @@ package co.edu.uniquindio.agencia.model;
 
 import lombok.*;
 
-import java.io.Serializable;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Setter
 @Getter
-public class Clientes implements Serializable {
+public class Clientes {
 
     private String nombre;
     private String cedula;

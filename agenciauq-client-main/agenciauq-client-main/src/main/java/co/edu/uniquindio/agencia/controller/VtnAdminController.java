@@ -74,8 +74,6 @@ public class VtnAdminController {
             // Cargar el FXML en el AnchorPane derecho
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnGestiGuias.fxml"));
             Pane nuevaVentana = loader.load();
-            VtnGestiGuiasController gestiGuiasController=loader.getController();
-            gestiGuiasController.init(panelVentanas);
 
             // Limpiar el contenido anterior y establecer el nuevo contenido
             panelVentanas.getChildren().clear();

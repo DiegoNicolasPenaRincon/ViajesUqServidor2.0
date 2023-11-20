@@ -49,7 +49,7 @@
             <Font name="Weather Icons Regular" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnRegresar" layoutX="454.0" layoutY="379.0" mnemonicParsing="false" onAction="#regresar" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #96C6E0;" text="Regresar">
+      <Button fx:id="btnRegresar" layoutX="454.0" layoutY="379.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #96C6E0;" text="Regresar">
          <font>
             <Font name="Weather Icons Regular" size="12.0" />
          </font>

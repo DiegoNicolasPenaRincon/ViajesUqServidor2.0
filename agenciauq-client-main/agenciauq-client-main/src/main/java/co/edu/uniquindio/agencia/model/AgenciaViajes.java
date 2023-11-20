@@ -360,6 +360,22 @@ public class AgenciaViajes {
         throw new SeleccionarElementoException("Debe seleccionar un elemento de la tabla");
     }
 
+    public boolean verificarReserva(Reservas reserva) throws SeleccionarElementoException {
+        if(reserva!=null){
+            return true;
+        }
+        LOGGER.log( Level.WARNING, "No se ha seleccionado algun elemento de la tabla" );
+        throw new SeleccionarElementoException("Debe seleccionar un elemento de la tabla");
+    }
+
+    public boolean verificarEstado(Reservas reserva) throws NoHayObjetoException {
+        if(reserva.getEstado()!=EstadoReserva.CANCELADA){
+            return true;
+        }
+        log.info("La reserva ya se encuentra cancelada");
+        throw new NoHayObjetoException("La reserva ya se encuentra cancelada");
+    }
+
     public boolean verificarDestinoEnLista(Destino destino, ArrayList<Destino> destinos){
         if (destinos.contains(destino)) {
             return false;
@@ -410,6 +426,23 @@ public class AgenciaViajes {
                 .build();
         listaReservas.add(reserva);
         Persistencia_Serializacion.serializarObjetoXML2(rutaReservas,listaReservas);
+    }
+
+    public void cancelarReserva(Reservas reserva) throws FileNotFoundException, NoHayObjetoException {
+        // Buscar la reserva en el ArrayList
+        int index = listaReservas.indexOf(reserva);
+
+        if (index != -1) {
+            // Modificar el estado de la reserva a "CANCELADA"
+            Reservas reservaEncontrada = listaReservas.get(index);
+            reservaEncontrada.setEstado(EstadoReserva.CANCELADA);
+
+            log.info("Reserva Cancelada");
+            Persistencia_Serializacion.serializarObjetoXML2(rutaReservas,listaReservas);
+        } else {
+            log.warning("Reserva no encontrada");
+            throw new NoHayObjetoException("No se ha encontrado la reserva");
+        }
     }
 
     public GuiasTuristicos buscarGuiaTuristico(String nombreGuia, int indice){

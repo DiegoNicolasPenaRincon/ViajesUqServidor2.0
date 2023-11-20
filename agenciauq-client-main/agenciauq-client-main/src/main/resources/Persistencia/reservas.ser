@@ -28,7 +28,7 @@
     <void property="estado">
      <object class="java.lang.Enum" method="valueOf">
       <class>co.edu.uniquindio.agencia.model.EstadoReserva</class>
-      <string>PENDIENTE</string>
+      <string>CANCELADA</string>
      </object>
     </void>
     <void property="fechaSolicitud">

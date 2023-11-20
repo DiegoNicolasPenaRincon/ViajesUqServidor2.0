@@ -71,7 +71,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnEliminar" layoutX="614.0" layoutY="309.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: red;" text="Eliminar" textFill="WHITE">
+      <Button fx:id="btnEliminar" layoutX="614.0" layoutY="309.0" mnemonicParsing="false" onAction="#cancelarReserva" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: red;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

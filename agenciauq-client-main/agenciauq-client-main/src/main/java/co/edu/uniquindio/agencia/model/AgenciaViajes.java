@@ -655,26 +655,6 @@ public class AgenciaViajes {
     }
 
 
-    /**
-     * Permite llenar un radioButton o un comboBox con las imagenes que tienen un destino, esto se hace para poder borrar estas imagenes posteriormente
-     * @param destino al que se le van a borrar las imagenes
-     * @param imagenesBorrar lista de imagenes que seran evaluadas por el administrador para posteriormente este decida si borrarlas o no
-     * @param longitud variable que permite recorrer la lista de imagenes del destino
-     * @return retorna la lista de iamgenes disponibles para ser borradas de un destino
-     */
-    public ArrayList<String> agregarImagenesParaBorrar(Destino destino,ArrayList<String> imagenesBorrar,int longitud) {
-        if(longitud<destino.getRutasImagenes().size())
-        {
-            imagenesBorrar.add(destino.getRutasImagenes().get(longitud));
-            return agregarImagenesParaBorrar(destino,imagenesBorrar,longitud+1);
-        }
-        else
-        {
-            return imagenesBorrar;
-        }
-
-    }
-
     //Metodos relacionados con los paquetes turisticos
 
     public void crearPaquete(String nombre, String duracion, String precio, String cupoMaximo, String serviciosAdicionales, LocalDate fechaIncio, LocalDate fechaFin, ArrayList<Destino> destinos) throws CampoObligatorioException, IgualesException, MalaFechaException, FileNotFoundException, ValorInvalidoException, SeleccionarElementoException {
@@ -878,14 +858,14 @@ public class AgenciaViajes {
     public void agregarGuiaTuristico(String nombre,String identificacion,ArrayList<String> lenguajes,String experiencia) throws CampoObligatorioException, IgualesException {
         validarVacio(nombre,"El guia debe tener un nombre");
         validarVacio(identificacion,"El guia debe tener una identificacion");
-        if(lenguajes.size()<1)
+        if(lenguajes.isEmpty())
         {
             throw new CampoObligatorioException("El guia debe conocer como minimo un lenguaje");
         }
         validarVacio(experiencia,"Debe especificar la experiencia que posee el guia");
         buscarGuiasIguales(identificacion,0);
         GuiasTuristicos guia=GuiasTuristicos.builder().nombre(nombre).identificacion(identificacion).lenguajes(lenguajes).experiencia(experiencia).build();
-
+        listaGuias.add(guia);
     }
 
     /**

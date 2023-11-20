@@ -855,7 +855,7 @@ public class AgenciaViajes {
      * @param lenguajes lenguajes que puede hablar el guia
      * @param experiencia experiencia que tiene el guia
      */
-    public void agregarGuiaTuristico(String nombre,String identificacion,ArrayList<String> lenguajes,String experiencia) throws CampoObligatorioException, IgualesException {
+    public void agregarGuiaTuristico(String nombre,String identificacion,ArrayList<String> lenguajes,String experiencia) throws CampoObligatorioException, IgualesException, FileNotFoundException {
         validarVacio(nombre,"El guia debe tener un nombre");
         validarVacio(identificacion,"El guia debe tener una identificacion");
         if(lenguajes.isEmpty())
@@ -866,25 +866,28 @@ public class AgenciaViajes {
         buscarGuiasIguales(identificacion,0);
         GuiasTuristicos guia=GuiasTuristicos.builder().nombre(nombre).identificacion(identificacion).lenguajes(lenguajes).experiencia(experiencia).build();
         listaGuias.add(guia);
+        Persistencia_Serializacion.serializarObjetoXML(rutaGuias,listaGuias);
     }
+
 
     /**
      * Metodo que elimina un guia turistico
-     * @param identificacion identificacion del guia
      * @param longitud longitud variable utilizada para buscar el guia
      */
-    public void eliminarGuiaTuristico(String identificacion,int longitud) {
+    public void eliminarGuiaTuristico(GuiasTuristicos guia,int longitud) throws FileNotFoundException {
         if(longitud<listaGuias.size())
         {
-            if(identificacion.equals(listaGuias.get(longitud).getIdentificacion()))
+            if(guia.equals(listaGuias.get(longitud)))
             {
                 listaGuias.remove(listaGuias.get(longitud));
             }
             else
             {
-                eliminarGuiaTuristico(identificacion,longitud+1);
+                eliminarGuiaTuristico(guia,longitud+1);
             }
         }
+
+        Persistencia_Serializacion.serializarObjetoXML(rutaGuias,listaGuias);
     }
 
     /**

@@ -44,12 +44,12 @@
          </font>
       </Label>
       <TextField fx:id="TxtExperiencia" layoutX="43.0" layoutY="367.0" prefHeight="79.0" prefWidth="289.0" />
-      <Button fx:id="btnAgregar" layoutX="454.0" layoutY="333.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #5E17EB;" text="Agregar" textFill="WHITE">
+      <Button fx:id="btnAgregar" layoutX="454.0" layoutY="333.0" mnemonicParsing="false" onAction="#agregarGuia" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #5E17EB;" text="Agregar" textFill="WHITE">
          <font>
             <Font name="Weather Icons Regular" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="btnRegresar" layoutX="454.0" layoutY="379.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #96C6E0;" text="Regresar">
+      <Button fx:id="btnRegresar" onAction="#regresar" layoutX="454.0" layoutY="379.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="95.0" style="-fx-background-color: #96C6E0;" text="Regresar">
          <font>
             <Font name="Weather Icons Regular" size="12.0" />
          </font>

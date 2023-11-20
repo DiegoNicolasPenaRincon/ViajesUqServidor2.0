@@ -402,6 +402,9 @@ public class AgenciaViajes {
             log.warning("El viaje no puede ser en una fecha anterior a la actual");
             throw new MalaFechaException("El viaje no puede ser en una fecha anterior a la actual");
         }
+        verificarFechasConPaquete(paquete.getFechaFin(), paquete.getFechaInicio(), fechaViaje);
+
+
         if(!numPersonas.matches("\\d+")){
             log.warning("El número de personas debe ser un valor numerico");
             throw new ValorInvalidoException("El número de personas debe ser un valor numerico");
@@ -442,6 +445,20 @@ public class AgenciaViajes {
         } else {
             log.warning("Reserva no encontrada");
             throw new NoHayObjetoException("No se ha encontrado la reserva");
+        }
+    }
+
+    public void verificarFechasConPaquete(LocalDate fechaFin, LocalDate fechaInicio, LocalDate fechaViaje) throws MalaFechaException {
+        if (fechaViaje.isAfter(fechaInicio) || fechaViaje.isEqual(fechaInicio)) {
+            if (fechaViaje.isBefore(fechaFin) || fechaViaje.isEqual(fechaFin)) {
+                log.info("Fecha dentro del rango");
+            } else {
+                log.warning("La fecha seleccionada es despues del final del paquete.");
+                throw new MalaFechaException("La fecha seleccionada es despues del final del paquete.");
+            }
+        } else {
+            log.warning("La fecha seleccionada es antes del inicio del paquete.");
+            throw new MalaFechaException("La fecha seleccionada es antes del inicio del paquete.");
         }
     }
 

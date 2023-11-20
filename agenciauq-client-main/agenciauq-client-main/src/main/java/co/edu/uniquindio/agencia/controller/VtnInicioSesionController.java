@@ -64,6 +64,7 @@ public class VtnInicioSesionController {
             VtnClientesController controller =loader.getController();
             controller.init(stage, this, cliente);
             stage.show();
+            this.stage.close();
 
         }
         else if(tipo.equals("admin")){
@@ -76,6 +77,7 @@ public class VtnInicioSesionController {
             VtnAdminController controller =loader.getController();
             controller.init(stage, this);
             stage.show();
+            this.stage.close();
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);

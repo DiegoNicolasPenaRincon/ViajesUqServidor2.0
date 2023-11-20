@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.4073660714285715" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="680.0" style="-fx-background-color: #96C6E0;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.agencia.controller.VtnAdminController">
+<SplitPane dividerPositions="0.2765310003803728" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="561.0" prefWidth="879.0" style="-fx-background-color: #96C6E0;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.agencia.controller.VtnAdminController">
   <items>
-    <AnchorPane fx:id="PanelBotones" minHeight="0.0" minWidth="0.0" prefHeight="501.0" prefWidth="195.0">
+    <AnchorPane fx:id="PanelBotones" minHeight="0.0" minWidth="0.0" prefHeight="501.0" prefWidth="247.0">
          <children>
             <Pane layoutX="-11.0" prefHeight="73.0" prefWidth="259.0">
                <children>
@@ -53,7 +53,15 @@
                   <Font name="Weather Icons Regular" size="12.0" />
                </font>
             </Button>
+            <Button fx:id="btnEstadisticas1" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="35.0" layoutY="485.0" mnemonicParsing="false" onAction="#mostrarVentanaEstadisticas" prefHeight="51.0" prefWidth="167.0" style="-fx-background-color: #96C6E0;" text="Cerrar Sesion">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+               <font>
+                  <Font name="Weather Icons Regular" size="12.0" />
+               </font>
+            </Button>
          </children></AnchorPane>
-    <AnchorPane fx:id="panelVentanas" minHeight="0.0" minWidth="0.0" prefHeight="501.0" prefWidth="490.0" />
+    <AnchorPane fx:id="panelVentanas" minHeight="0.0" minWidth="0.0" prefHeight="557.0" prefWidth="631.0" />
   </items>
 </SplitPane>

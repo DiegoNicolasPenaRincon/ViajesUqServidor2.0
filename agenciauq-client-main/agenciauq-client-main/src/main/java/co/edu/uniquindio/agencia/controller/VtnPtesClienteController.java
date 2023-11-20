@@ -68,6 +68,10 @@ public class VtnPtesClienteController implements Initializable {
 
         ObservableList<PaqueteTuristico> listaPaquetes = FXCollections.observableArrayList(agenciaViajes.getListaPaquetes());
         tablaDestinos.setItems(listaPaquetes);
+
+        ScrollPane scrollPane = new ScrollPane(panelVentana);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
     }
 
     public void verDetalles()  {

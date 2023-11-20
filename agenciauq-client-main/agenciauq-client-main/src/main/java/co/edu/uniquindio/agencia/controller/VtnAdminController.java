@@ -2,6 +2,8 @@ package co.edu.uniquindio.agencia.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -93,6 +95,19 @@ public class VtnAdminController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void cerrarSesion() throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/Ventanas/VtnInicioSesion.fxml"));
+        Parent root=loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        VtnInicioSesionController inicioSesionController=loader.getController();
+        inicioSesionController.setStage(this.stage);
+        stage.show();
+        this.stage.close();
+
     }
 
 

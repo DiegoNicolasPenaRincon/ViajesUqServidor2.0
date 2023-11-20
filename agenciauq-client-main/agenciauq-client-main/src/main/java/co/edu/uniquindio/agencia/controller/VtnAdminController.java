@@ -2,7 +2,6 @@ package co.edu.uniquindio.agencia.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +9,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class VtnAdminController {
@@ -39,104 +37,80 @@ public class VtnAdminController {
         this.vtnInicioSesionController=vtnInicioSesionController;
     }
 
-    public void mostrarVentanaDestinos(ActionEvent event) {
+    public void mostrarVentanaDestinos(){
         try {
-            // Cargar la segunda ventana desde su archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VtnGestDestino.fxml"));
-            Parent root = loader.load();
+            // Cargar el FXML en el AnchorPane derecho
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnGestDestino.fxml"));
+            Pane nuevaVentana = loader.load();
+            VtnGestDestinoController gestDestinoController=loader.getController();
+            gestDestinoController.init(panelVentanas);
 
-            // Crear un nuevo escenario para la segunda ventana
-            Stage VentanaDestinosStage = new Stage();
-            VentanaDestinosStage.setTitle("Ventana Destinos");
-            VentanaDestinosStage.setScene(new Scene(root));
-
-            // Cerrar la ventana actual (primera ventana)
-            Stage VtnAdmin = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            VtnAdmin.close();
-
-            // Mostrar la segunda ventana
-            VentanaDestinosStage.show();
-
+            // Limpiar el contenido anterior y establecer el nuevo contenido
+            panelVentanas.getChildren().clear();
+            panelVentanas.getChildren().add(nuevaVentana);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    public void mostrarVentanaPaquetes(ActionEvent event) {
+    public void mostrarVentanaPaquetes(){
         try {
-            // Cargar la segunda ventana desde su archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VtnGestPaquetes.fxml"));
-            Parent root = loader.load();
+            // Cargar el FXML en el AnchorPane derecho
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnGestPaquetes.fxml"));
+            Pane nuevaVentana = loader.load();
+            VtnGestPaquetesController gestPaquetesController=loader.getController();
+            gestPaquetesController.init(panelVentanas);
 
-            // Crear un nuevo escenario para la segunda ventana
-            Stage VtnGestPaquetesStage = new Stage();
-            VtnGestPaquetesStage.setTitle("Ventana Gestionar Paquetes");
-            VtnGestPaquetesStage.setScene(new Scene(root));
-
-            // Cerrar la ventana actual (primera ventana)
-            Stage primeraVentanaStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            VtnGestPaquetesStage.close();
-
-            // Mostrar la segunda ventana
-            VtnGestPaquetesStage.show();
-
+            // Limpiar el contenido anterior y establecer el nuevo contenido
+            panelVentanas.getChildren().clear();
+            panelVentanas.getChildren().add(nuevaVentana);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void mostrarVentanaGuias(ActionEvent event) {
+    public void mostrarVentanaGuias(){
         try {
-            // Cargar la segunda ventana desde su archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VtnGestiGuias.fxml"));
-            Parent root = loader.load();
+            // Cargar el FXML en el AnchorPane derecho
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnGestiGuias.fxml"));
+            Pane nuevaVentana = loader.load();
 
-            // Crear un nuevo escenario para la segunda ventana
-            Stage VtnGestiGuiasStage = new Stage();
-            VtnGestiGuiasStage.setTitle("Ventana Guias");
-            VtnGestiGuiasStage.setScene(new Scene(root));
-
-            // Cerrar la ventana actual (primera ventana)
-            Stage primeraVentanaStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            VtnGestiGuiasStage.close();
-
-            // Mostrar la segunda ventana
-            VtnGestiGuiasStage.show();
-
+            // Limpiar el contenido anterior y establecer el nuevo contenido
+            panelVentanas.getChildren().clear();
+            panelVentanas.getChildren().add(nuevaVentana);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    private void mostrarSegundaVentana() {
+    public void mostrarVentanaEstadisticas(){
         try {
-            // Cargar la segunda ventana desde su archivo FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("VtnEstadisticas.fxml"));
-            Parent root = loader.load();
+            // Cargar el FXML en el AnchorPane derecho
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ventanas/VtnEstadisticas.fxml"));
+            Pane nuevaVentana = loader.load();
 
-            // Crear un nuevo escenario para la segunda ventana
-            Stage VtnEstadisticasStage = new Stage();
-            VtnEstadisticasStage.setTitle("Ventana Estadisticas");
-            VtnEstadisticasStage.setScene(new Scene(root));
-
-            // Mostrar la segunda ventana
-            VtnEstadisticasStage.show();
-
-            // Cerrar la ventana actual (primera ventana)
-            Stage VtnAdminStage = (Stage) btnEstadisticas.getScene().getWindow();
-            VtnAdminStage.close();
-
+            // Limpiar el contenido anterior y establecer el nuevo contenido
+            panelVentanas.getChildren().clear();
+            panelVentanas.getChildren().add(nuevaVentana);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public void cerrarSesion() throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/Ventanas/VtnInicioSesion.fxml"));
+        Parent root=loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        VtnInicioSesionController inicioSesionController=loader.getController();
+        inicioSesionController.setStage(this.stage);
+        stage.show();
+        this.stage.close();
+
+    }
+
+
+
+
 }
-
-
-
-
-
-
-

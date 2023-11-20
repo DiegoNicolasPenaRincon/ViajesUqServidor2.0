@@ -17,8 +17,13 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Properties;
 
 public class VtnReservarController {
 
@@ -99,10 +104,18 @@ public class VtnReservarController {
                 boxGuia.getValue(),
                 lblPrecio.getText());
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Nueva Reserva Creada.");
             alert.setHeaderText(null);
             alert.show();
+            Thread correoThread = new Thread(() -> {
+                try {
+                    enviarCorreo();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            correoThread.start();
             regresar();
         }catch(CampoObligatorioException | MalaFechaException | ValorInvalidoException e){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -114,6 +127,48 @@ public class VtnReservarController {
         }
 
 
+    }
+
+    public void enviarCorreo(){
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        // Credenciales del remitente
+        final String username = "santiagobv687@gmail.com";
+        final String password = "jxpr ewfx cysj oaop";
+
+        // Crear una sesión de correo con autenticación
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            // Crear un mensaje de correo
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(cliente.getCorreo()));
+            message.setSubject("Reserva en Agencia de Viajes Uq");
+            message.setText("Paquete Turistico: " +paquete.getNombre()+"\n"+
+                    "Fecha de realización de la Reserva:"+ LocalDate.now()+"\n"+
+                    "Fecha del viaje: "+ DateInicio.getValue()+"\n"+
+                    "Guia Turistico:" +boxGuia.getValue()+"\n"+
+                    "Precio Total: "+lblPrecio.getText());
+
+            // Enviar el mensaje
+            Transport.send(message);
+
+            System.out.println("Correo enviado con éxito.");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.err.println("Error al enviar el correo: " + e.getMessage());
+        }
     }
 
 

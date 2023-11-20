@@ -94,6 +94,13 @@ public class VtnAgregarDestinosController {
 
             agenciaViajes.mensajeInformativo("El destino se ha creado exitosamente");
 
+            txtImagen1.clear();
+            txtImagen2.clear();
+            txtImagen3.clear();
+            txtCiudad.clear();
+            txtNombre.clear();
+            txtDescripcion.clear();
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setContentText("El destino se ha creado exitosamente ");
             alert.setHeaderText(null);

@@ -19,19 +19,4 @@ public class GuiasTuristicos implements Serializable {
     public static ArrayList<String> lenguajesDisponibles;
     private String experiencia;
 
-    //Metodos
-
-    /**
-     * Metodo que ingresa los lenguajes del archivo txt al Arraylist<String> lenguajesDisponbiles
-     */
-    public void ingresarLenguajes() {
-        try
-        {
-            lenguajesDisponibles= Persistencia_Serializacion.leerArchivoBufferedReader("/src/main/resources/Persistencia/lenguajes.txt");
-        }
-        catch (Exception ex)
-        {
-            ex.getMessage();
-        }
-    }
 }

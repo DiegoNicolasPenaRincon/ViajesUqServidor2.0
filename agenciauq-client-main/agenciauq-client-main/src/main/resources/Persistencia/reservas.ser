@@ -6,29 +6,29 @@
     <void property="cliente">
      <object class="co.edu.uniquindio.agencia.model.Clientes">
       <void property="cedula">
-       <string>222</string>
+       <string>111</string>
       </void>
       <void property="contrasena">
-       <string>xd</string>
+       <string>1234</string>
       </void>
       <void property="correo">
-       <string>tttt@</string>
+       <string>santiago.betancourtv@uqvirtual.edu.co</string>
       </void>
       <void property="direccion">
-       <string>armenia</string>
+       <string>Colombia</string>
       </void>
       <void property="nombre">
-       <string>Juan</string>
+       <string>Santiago</string>
       </void>
       <void property="telefono">
-       <string>312</string>
+       <string>315</string>
       </void>
      </object>
     </void>
     <void property="estado">
      <object class="java.lang.Enum" method="valueOf">
       <class>co.edu.uniquindio.agencia.model.EstadoReserva</class>
-      <string>PENDIENTE</string>
+      <string>CANCELADA</string>
      </object>
     </void>
     <void property="fechaSolicitud">
@@ -38,7 +38,7 @@
     </void>
     <void property="fechaViaje">
      <object class="java.time.LocalDate" method="parse">
-      <string>2023-11-20</string>
+      <string>2023-11-22</string>
      </object>
     </void>
     <void property="numPersonas">

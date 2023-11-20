@@ -5,11 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import utils.Persistencia_Serializacion;
-
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -28,6 +25,7 @@ public class AgenciaViajes {
     private ArrayList<PaqueteTuristico> listaPaquetes;
     @Getter
     private ArrayList<GuiasTuristicos> listaGuias;
+    @Getter
     private ArrayList<Reservas> listaReservas;
     private static final Logger LOGGER= Logger.getLogger(AgenciaViajes.class.getName());
     private static AgenciaViajes AgenciaViajes;
@@ -362,6 +360,22 @@ public class AgenciaViajes {
         throw new SeleccionarElementoException("Debe seleccionar un elemento de la tabla");
     }
 
+    public boolean verificarReserva(Reservas reserva) throws SeleccionarElementoException {
+        if(reserva!=null){
+            return true;
+        }
+        LOGGER.log( Level.WARNING, "No se ha seleccionado algun elemento de la tabla" );
+        throw new SeleccionarElementoException("Debe seleccionar un elemento de la tabla");
+    }
+
+    public boolean verificarEstado(Reservas reserva) throws NoHayObjetoException {
+        if(reserva.getEstado()!=EstadoReserva.CANCELADA){
+            return true;
+        }
+        log.info("La reserva ya se encuentra cancelada");
+        throw new NoHayObjetoException("La reserva ya se encuentra cancelada");
+    }
+
     public boolean verificarDestinoEnLista(Destino destino, ArrayList<Destino> destinos){
         if (destinos.contains(destino)) {
             return false;
@@ -388,6 +402,9 @@ public class AgenciaViajes {
             log.warning("El viaje no puede ser en una fecha anterior a la actual");
             throw new MalaFechaException("El viaje no puede ser en una fecha anterior a la actual");
         }
+        verificarFechasConPaquete(paquete.getFechaFin(), paquete.getFechaInicio(), fechaViaje);
+
+
         if(!numPersonas.matches("\\d+")){
             log.warning("El número de personas debe ser un valor numerico");
             throw new ValorInvalidoException("El número de personas debe ser un valor numerico");
@@ -412,6 +429,37 @@ public class AgenciaViajes {
                 .build();
         listaReservas.add(reserva);
         Persistencia_Serializacion.serializarObjetoXML2(rutaReservas,listaReservas);
+    }
+
+    public void cancelarReserva(Reservas reserva) throws FileNotFoundException, NoHayObjetoException {
+        // Buscar la reserva en el ArrayList
+        int index = listaReservas.indexOf(reserva);
+
+        if (index != -1) {
+            // Modificar el estado de la reserva a "CANCELADA"
+            Reservas reservaEncontrada = listaReservas.get(index);
+            reservaEncontrada.setEstado(EstadoReserva.CANCELADA);
+
+            log.info("Reserva Cancelada");
+            Persistencia_Serializacion.serializarObjetoXML2(rutaReservas,listaReservas);
+        } else {
+            log.warning("Reserva no encontrada");
+            throw new NoHayObjetoException("No se ha encontrado la reserva");
+        }
+    }
+
+    public void verificarFechasConPaquete(LocalDate fechaFin, LocalDate fechaInicio, LocalDate fechaViaje) throws MalaFechaException {
+        if (fechaViaje.isAfter(fechaInicio) || fechaViaje.isEqual(fechaInicio)) {
+            if (fechaViaje.isBefore(fechaFin) || fechaViaje.isEqual(fechaFin)) {
+                log.info("Fecha dentro del rango");
+            } else {
+                log.warning("La fecha seleccionada es despues del final del paquete.");
+                throw new MalaFechaException("La fecha seleccionada es despues del final del paquete.");
+            }
+        } else {
+            log.warning("La fecha seleccionada es antes del inicio del paquete.");
+            throw new MalaFechaException("La fecha seleccionada es antes del inicio del paquete.");
+        }
     }
 
     public GuiasTuristicos buscarGuiaTuristico(String nombreGuia, int indice){
@@ -450,6 +498,12 @@ public class AgenciaViajes {
         {
             throw new CampoObligatorioException("El destino debe de tener por lo menos una imagen que lo caracterice");
         }
+
+        if(clima==null)
+        {
+            throw new CampoObligatorioException("Debe especificar el clima del destino");
+        }
+
         validarDestinosIguales(nombre,0,ciudad);
         Destino destino=Destino.builder()
                 .nombre(nombre)
@@ -494,17 +548,24 @@ public class AgenciaViajes {
         }
     }
 
-    public void agregarDestinoPaquete(int longitud,Destino destino) throws FileNotFoundException {
+    public void agregarDestinoPaquete(int longitud,Destino destino,PaqueteTuristico paquete) throws FileNotFoundException {
         if(longitud<listaPaquetes.size())
         {
-            if(!listaPaquetes.get(longitud).getDestinos().contains(destino))
+            if(paquete.equals(listaPaquetes.get(longitud)))
             {
-                listaPaquetes.get(longitud).getDestinos().add(destino);
-                longitud=listaPaquetes.size();
+                if(!paquete.getDestinos().contains(destino))
+                {
+                    listaPaquetes.get(longitud).getDestinos().add(destino);
+                    longitud=listaPaquetes.size();
+                }
+                else
+                {
+                    longitud=listaPaquetes.size();
+                }
             }
             else
             {
-                agregarDestinoPaquete(longitud+1,destino);
+                agregarDestinoPaquete(longitud+1,destino,paquete);
             }
         }
     }
@@ -558,7 +619,7 @@ public class AgenciaViajes {
                     }
                 }
 
-                modificarDestinoPaquete(0,destino);
+                modificarDestinoPaquete(0,listaDestinos.get(longitud),destino,0);
                 longitud=listaDestinos.size();
             }
             else
@@ -567,44 +628,32 @@ public class AgenciaViajes {
             }
 
             Persistencia_Serializacion.serializarObjetoXML(rutaDestinos,listaDestinos);
+            Persistencia_Serializacion.serializarObjetoXMLConLocalDate(rutaPaquetes,listaPaquetes);
         }
     }
 
-    public void modificarDestinoPaquete(int longitud, Destino destino) {
+    public void modificarDestinoPaquete(int longitud, Destino destino,Destino destino1,int longitud2) throws FileNotFoundException {
         if(longitud<listaPaquetes.size())
         {
-            if(listaPaquetes.get(longitud).getDestinos().contains(destino))
+            if(longitud2<listaPaquetes.get(longitud).getDestinos().size())
             {
-                int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino);
-                listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+                if(destino1.equals(listaPaquetes.get(longitud).getDestinos().get(longitud2)))
+                {
+                    int indice=listaPaquetes.get(longitud).getDestinos().indexOf(destino1);
+                    listaPaquetes.get(longitud).getDestinos().set(indice,destino);
+                }
+                else
+                {
+                    modificarDestinoPaquete(longitud,destino,destino1,longitud2+1);
+                }
             }
             else
             {
-                modificarDestinoPaquete(longitud+1,destino);
+                modificarDestinoPaquete(longitud+1,destino,destino1,longitud2=0);
             }
         }
     }
 
-
-    /**
-     * Permite llenar un radioButton o un comboBox con las imagenes que tienen un destino, esto se hace para poder borrar estas imagenes posteriormente
-     * @param destino al que se le van a borrar las imagenes
-     * @param imagenesBorrar lista de imagenes que seran evaluadas por el administrador para posteriormente este decida si borrarlas o no
-     * @param longitud variable que permite recorrer la lista de imagenes del destino
-     * @return retorna la lista de iamgenes disponibles para ser borradas de un destino
-     */
-    public ArrayList<String> agregarImagenesParaBorrar(Destino destino,ArrayList<String> imagenesBorrar,int longitud) {
-        if(longitud<destino.getRutasImagenes().size())
-        {
-            imagenesBorrar.add(destino.getRutasImagenes().get(longitud));
-            return agregarImagenesParaBorrar(destino,imagenesBorrar,longitud+1);
-        }
-        else
-        {
-            return imagenesBorrar;
-        }
-
-    }
 
     //Metodos relacionados con los paquetes turisticos
 
@@ -809,14 +858,14 @@ public class AgenciaViajes {
     public void agregarGuiaTuristico(String nombre,String identificacion,ArrayList<String> lenguajes,String experiencia) throws CampoObligatorioException, IgualesException {
         validarVacio(nombre,"El guia debe tener un nombre");
         validarVacio(identificacion,"El guia debe tener una identificacion");
-        if(lenguajes.size()<1)
+        if(lenguajes.isEmpty())
         {
             throw new CampoObligatorioException("El guia debe conocer como minimo un lenguaje");
         }
         validarVacio(experiencia,"Debe especificar la experiencia que posee el guia");
         buscarGuiasIguales(identificacion,0);
         GuiasTuristicos guia=GuiasTuristicos.builder().nombre(nombre).identificacion(identificacion).lenguajes(lenguajes).experiencia(experiencia).build();
-
+        listaGuias.add(guia);
     }
 
     /**
@@ -1115,4 +1164,7 @@ public class AgenciaViajes {
         }
 
     }
+
+
+
 }

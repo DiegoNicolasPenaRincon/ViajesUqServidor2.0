@@ -1,31 +1,44 @@
 package co.edu.uniquindio.agencia.app;
 
 import co.edu.uniquindio.agencia.controller.VtnInicioSesionController;
+import co.edu.uniquindio.agencia.model.AgenciaViajes;
+import co.edu.uniquindio.agencia.socket.HiloCliente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 public class AgenciaApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        int puerto =1234;
 
-        FXMLLoader loader = new FXMLLoader( AgenciaApp.class.getResource("/Ventanas/VtnInicioSesion.fxml") );
-        Parent parent= loader.load();
+        AgenciaViajes agenciaViajes=AgenciaViajes.getInstance();
 
-        Scene scene = new Scene(parent);
-        stage.setScene(scene);
-        stage.setTitle("Agencia de Viajes UQ");
-        VtnInicioSesionController controller =loader.getController();
-        controller.setStage(stage);
-        stage.show();
+        try(ServerSocket serverSocket=new ServerSocket(puerto)){
+            System.out.println(("Esperando conexión"));
+            while(true){
+                Socket clienteSocket=serverSocket.accept();
+                System.out.println("Cliente conectado");
+
+                HiloCliente hilo=new HiloCliente(clienteSocket, agenciaViajes);
+                new Thread(hilo).start();
+            }
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
 
     }
 
     public static void main(String[] args) {
         launch( AgenciaApp.class, args );
-    }
 
+
+    }
 }

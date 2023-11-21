@@ -46,7 +46,7 @@ public class VtnRegistroController {
 
     public void registrarCliente(){
         try{
-            Clientes cliente= agenciaViajes.registrarCliente(
+            agenciaViajes.registrarCliente(
                     TxtNombre.getText(),
                     TxtCedula.getText(),
                     TxtContrasena.getText(),
@@ -56,7 +56,7 @@ public class VtnRegistroController {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
-            alert.setContentText("Se ha registrado correctamente el cliente "+cliente.getNombre());
+            alert.setContentText("Se ha registrado correctamente el cliente "+TxtNombre.getText());
             alert.show();
             stage.close();
         } catch (CampoObligatorioException | IgualesException e) {

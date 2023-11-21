@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.extern.java.Log;
 import utils.Persistencia_Serializacion;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.FileHandler;
@@ -76,7 +77,7 @@ public class AgenciaViajes {
         return AgenciaViajes;
     }
 
-    public void cargarClientes() throws IOException {
+    public ArrayList<Clientes> cargarClientes() throws IOException {
         ArrayList<String> lineas = Persistencia_Serializacion.leerArchivoBufferedReader(rutaClientes);
         for (String linea : lineas) {
             String[] partes = linea.split(",");
@@ -101,9 +102,10 @@ public class AgenciaViajes {
                 listaClientes.add(cliente);
             }
         }
+        return listaClientes;
     }
 
-    public void cargarAdmins() throws IOException {
+    public ArrayList<Administradores> cargarAdmins() throws IOException {
         ArrayList<String> lineas = Persistencia_Serializacion.leerArchivoBufferedReader(rutaAdministradores);
         for (String linea : lineas) {
             String[] partes = linea.split(",");
@@ -120,11 +122,13 @@ public class AgenciaViajes {
                         .build();
 
                 listaAdministradores.add(admin);
+                System.out.println(admin.getNombre());
             }
         }
+        return listaAdministradores;
     }
 
-    public void cargarDestinos(){
+    public ArrayList<Destino> cargarDestinos(){
         File archivo = new File(rutaDestinos);
 
         if (archivo.exists() && archivo.length() > 0) {
@@ -141,9 +145,10 @@ public class AgenciaViajes {
         } else {
             log.warning("El archivo Destinos esta vacio o no existe.");
         }
+        return listaDestinos;
     }
 
-    public void cargarPaquetesTuristicos(){
+    public ArrayList<PaqueteTuristico> cargarPaquetesTuristicos(){
         File archivo = new File(rutaPaquetes);
 
         if (archivo.exists() && archivo.length() > 0) {
@@ -160,9 +165,10 @@ public class AgenciaViajes {
         } else {
             log.warning("El archivo Paquetes Turisticos esta vacio o no existe.");
         }
+        return listaPaquetes;
     }
 
-    public void cargarGuiasTuristicos(){
+    public ArrayList<GuiasTuristicos> cargarGuiasTuristicos(){
         File archivo = new File(rutaGuias);
 
         if (archivo.exists() && archivo.length() > 0) {
@@ -179,9 +185,10 @@ public class AgenciaViajes {
         } else {
             log.warning("El archivo Guias Turisticos esta vacio o no existe.");
         }
+        return listaGuias;
     }
 
-    public void cargarReservas(){
+    public ArrayList<Reservas> cargarReservas(){
         File archivo = new File(rutaReservas);
 
         if (archivo.exists() && archivo.length() > 0) {
@@ -198,8 +205,9 @@ public class AgenciaViajes {
         } else {
             log.warning("El archivo Reservas esta vacio o no existe.");
         }
+        return listaReservas;
     }
-    public Clientes registrarCliente(String nombre, String cedula, String contrasena, String telefono,
+    public void registrarCliente(String nombre, String cedula, String contrasena, String telefono,
                                  String correo, String direccion) throws CampoObligatorioException, IgualesException, IOException {
         if(nombre.isBlank() || cedula.isBlank() || contrasena.isBlank() || correo.isBlank() || telefono.isBlank() || direccion.isBlank() ||
         nombre==null || cedula==null || contrasena==null || correo==null || telefono==null || direccion==null){
@@ -228,9 +236,6 @@ public class AgenciaViajes {
         String clienteInfo = nombre + "," + cedula + "," +contrasena+ ","+ telefono + "," + correo + "," + direccion ;
         linea.add(clienteInfo);
         Persistencia_Serializacion.escribirArchivoBufferedWriter("src/main/resources/Persistencia/clientes.txt", linea, true);
-
-
-        return cliente;
     }
 
     public String verificarInicio(String nombre, String contrasena, int indice, int indice2) {

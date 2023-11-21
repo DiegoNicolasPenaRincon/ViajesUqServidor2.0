@@ -32,7 +32,6 @@ public class HiloCliente implements Runnable{
             String tipo= mensaje.getTipo();
 
             Object contenido=mensaje.getContenido();
-
             switch(tipo){
                 case "cargarClientes":
                     cargarClientes(out);
@@ -54,6 +53,8 @@ public class HiloCliente implements Runnable{
                     break;
                 case "registrarCliente":
                     registrarCliente((Clientes) contenido, out);
+                    break;
+                case "verificarInicio":
                     break;
             }
 

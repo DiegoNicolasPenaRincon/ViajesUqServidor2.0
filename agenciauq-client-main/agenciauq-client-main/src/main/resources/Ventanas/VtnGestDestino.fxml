@@ -50,11 +50,5 @@
          </font>
       </Label>
       <Button fx:id="btnConsultar" layoutX="348.0" layoutY="262.0" mnemonicParsing="false" onAction="#abrirConsultarDestino" prefHeight="37.0" prefWidth="160.0" style="-fx-background-color: #1e90ff;" text="Consultar" textFill="WHITE" />
-      <Label layoutX="347.0" layoutY="317.0" prefHeight="20.0" prefWidth="147.0" text="Regresar">
-         <font>
-            <Font name="Weather Icons Regular" size="12.0" />
-         </font>
-      </Label>
-      <Button fx:id="regresar" layoutX="348.0" layoutY="348.0" mnemonicParsing="false" onAction="#regresar" prefHeight="37.0" prefWidth="160.0" style="-fx-background-color: #1e90ff;" text="Regresar" textFill="WHITE" />
    </children>
 </Pane>

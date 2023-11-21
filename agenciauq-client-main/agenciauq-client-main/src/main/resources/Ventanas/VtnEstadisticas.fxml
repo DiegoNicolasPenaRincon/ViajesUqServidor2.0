@@ -83,10 +83,5 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </BarChart>
-      <Button fx:id="regresar" layoutX="594.0" layoutY="614.0" mnemonicParsing="false" onAction="#regresar" prefHeight="37.0" prefWidth="89.0" style="-fx-background-color: #96C6E0;" text="Regresar" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

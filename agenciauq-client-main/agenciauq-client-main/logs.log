@@ -350,3 +350,85 @@ nov 20, 2023 8:34:56 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes carga
 INFO: Reservas cargadas correctamente
 nov 20, 2023 8:35:03 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes registrarCliente
 SEVERE: Debe de ingresar todos los datos para registrar un nuevo usuario
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Se crea una nueva instancia de Agencia de Viajes.
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Clientes cargados correctamente
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Administradores cargados correctamente
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 9:46:02 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:03:18 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Se crea una nueva instancia de Agencia de Viajes.
+nov 20, 2023 10:03:18 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Clientes cargados correctamente
+nov 20, 2023 10:03:18 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Administradores cargados correctamente
+nov 20, 2023 10:03:19 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:03:19 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:03:19 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:03:19 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:03:43 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:03:43 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:03:43 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:03:43 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:05:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:05:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:05:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:05:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:13:16 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:13:16 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:13:16 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:13:16 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:15:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:15:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:15:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:15:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Se crea una nueva instancia de Agencia de Viajes.
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Clientes cargados correctamente
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes <init>
+INFO: Administradores cargados correctamente
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:19:52 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente
+nov 20, 2023 10:20:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarDestinos
+INFO: Destinos cargados correctamente
+nov 20, 2023 10:20:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarPaquetesTuristicos
+INFO: Paquetes Turisticos cargados correctamente
+nov 20, 2023 10:20:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarGuiasTuristicos
+INFO: Guias Turisticos cargados correctamente
+nov 20, 2023 10:20:25 P. M. co.edu.uniquindio.agencia.model.AgenciaViajes cargarReservas
+INFO: Reservas cargadas correctamente

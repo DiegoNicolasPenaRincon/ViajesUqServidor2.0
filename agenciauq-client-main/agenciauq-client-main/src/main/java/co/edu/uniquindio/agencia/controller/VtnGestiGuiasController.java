@@ -1,6 +1,8 @@
 package co.edu.uniquindio.agencia.controller;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -8,7 +10,12 @@ import java.io.IOException;
 
 public class VtnGestiGuiasController {
 
+
+    @FXML
+    public Button btnAgGuias;
+
     private AnchorPane panel;
+
     public void abrirAgregarGuias(){
         try {
             // Cargar el FXML en el AnchorPane derecho
@@ -43,4 +50,3 @@ public class VtnGestiGuiasController {
         this.panel=panelVentanas;
     }
 }
-
